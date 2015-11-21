@@ -78,3 +78,21 @@ class ArcadiaReplHistoryCommand(sublime_plugin.TextCommand):
             G["hist"] += i
             print(history[G["hist"]])
             repl.replace(edit,sublime.Region(G["prompt"], repl.size()), history[G["hist"]])
+
+class ArcadiaReplTransferCommand(sublime_plugin.TextCommand):
+    def run(self, edit, scope="block"):
+        repl = get_repl(self.view.window())
+        text = ""
+        sel = []
+        for region in self.view.sel(): sel.append(region)
+        if scope == "block": self.view.run_command("expand_selection", {"to": "brackets"})
+        for idx in range(len(self.view.sel())):
+            if scope == "selection":
+                text += self.view.substr(self.view.sel()[idx])
+            elif scope == "block":
+                text += self.view.substr(sublime.Region(self.view.sel()[idx].a - 1, self.view.sel()[idx].b + 1))
+            elif scope == "file":
+                text = self.view.substr(sublime.Region(0, self.view.size()))
+        self.view.sel().clear()
+        for region in sel: self.view.sel().add(region)
+        send_repl(text)
