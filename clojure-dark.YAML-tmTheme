@@ -1,0 +1,146 @@
+# [PackageDev] target_format: plist, ext: tmTheme
+name: clojure-dark
+uuid: -2095953460-558446636-1373169771
+author: selfsame
+colorSpaceName: sRGB
+gutterSettings:
+  background: '#101315'
+  divider: '#05386C'
+  foreground: '#5F7387'
+  selectionBackground: '#4f5b66'
+  selectionForeground: '#a7adba'
+semanticClass: clojure.dark
+settings:
+- settings:
+    background: '#0F1214'
+    caret: '#A9BACB'
+    foreground: '#A9BACB'
+    invisibles: '#0F335A'
+    lineHighlight: '#240F21'
+    selection: '#61295A'
+    selectionForeground: '#95F7D1'
+
+
+- name: comment
+  scope: comment
+  settings:
+    foreground: '#545454'
+
+
+- name: sexpr
+  scope: 'meta.sexpr entity.sequence'
+  settings:
+    foreground: '#AF4723'
+- name: sexpr2
+  scope: 'meta.sexpr meta.sexpr entity.sequence'
+  settings:
+    foreground: '#14A5BF'
+- name: sexpr3
+  scope: 'meta.sexpr meta.sexpr meta.sexpr entity.sequence'
+  settings:
+    foreground: '#6237B2'
+- name: sexpr4
+  scope: 'meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence'
+  settings:
+    foreground: '#397B27'
+- name: sexpr5
+  scope: 'meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence'
+  settings:
+    foreground: '#8DA0A3'
+- name: sexpr6
+  scope: 'meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence'
+  settings:
+    foreground: '#873472'
+- name: sexpr7
+  scope: 'meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence'
+  settings:
+    foreground: '#5460D5'
+- name: sexpr8
+  scope: 'meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence'
+  settings:
+    foreground: '#6E9548'
+- name: sexpr9
+  scope: 'meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence'
+  settings:
+    foreground: '#AE7843'
+- name: sexpr10
+  scope: 'meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence'
+  settings:
+    foreground: '#909090'
+
+
+- scope: 'meta.vec entity.sequence'
+  settings:
+    foreground: '#3383E7'
+- scope: 'meta.vec meta.vec entity.sequence'
+  settings:
+    foreground: '#C8BF2C'
+- scope: 'meta.vec meta.vec meta.vec entity.sequence'
+  settings:
+    foreground: '#649646'
+- scope: 'meta.vec meta.vec meta.vec meta.vec entity.sequence'
+  settings:
+    foreground: '#833D22'
+- scope: 'meta.vec meta.vec meta.vec meta.vec meta.vec entity.sequence'
+  settings:
+    foreground: '#589296'
+- scope: 'meta.vec meta.vec meta.vec meta.vec meta.vec meta.vec entity.sequence'
+  settings:
+    foreground: '#9264B2'
+- scope: 'meta.vec meta.vec meta.vec meta.vec meta.vec meta.vec meta.vec entity.sequence'
+  settings:
+    foreground: '#7D7E7C'
+
+
+
+- name: symbol
+  scope: 'meta.sexpr symbol'
+  settings:
+    foreground: '#CE8065'
+
+- name: symbol2
+  scope: 'meta.sexpr meta.sexpr symbol'
+  settings:
+    foreground: '#867C76'
+
+
+- name: integer
+  scope: integer
+  settings:
+    foreground: '#FFDE00'
+
+- name: float
+  scope: float
+  settings:
+    foreground: '#FF5A00'
+
+- name: keyword
+  scope: meta.keyword
+  settings:
+    foreground: '#984CFF'
+
+- name: string_quoted
+  scope: 'string.quoted.double.clojure'
+  settings:
+    fontStyle: ' italic'
+    foreground: '#168834'
+
+- name: regex
+  scope: string.quoted.regex.clojure
+  settings:
+    fontStyle: bold
+    background: '#072705'
+    foreground: '#96FF00'
+
+- name: char
+  scope: 'constant.character.escape'
+  settings:
+    fontStyle: 'bold'
+    background: '#221105'
+    foreground: '#3B93FF'
+
+- name: illegal
+  scope: 'invalid'
+  settings:
+    background: '#FF0000'
+    foreground: '#000000'

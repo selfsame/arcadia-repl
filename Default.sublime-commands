@@ -1,7 +1,0 @@
-[
-
-    {	"id":"arcadia-repl",
-    	"caption": "Start Arcadia REPL",
-        "command": "start_arcadia_repl"
-    }
-]

@@ -1,0 +1,100 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+---
+name: Clojure
+scopeName: source.clojure
+fileTypes: [xyz, cljs, clj, cljc]
+uuid: -5584466320959560-558446636-69771
+
+patterns:
+- include: '#all'
+
+repository:
+
+  comment:
+    name: comment.line.clojure
+    match: ;.*$\n?
+
+  all:
+    patterns:
+    - include: '#comment'
+    - include: '#expr'
+
+  expr:
+    patterns:
+    - include: '#string_escape'
+    - include: '#string'
+    - include: '#regex'
+    - include: '#sexpr'
+    - include: '#keyword'
+    - include: '#number'
+    - include: '#symbol'
+
+  sexpr:
+    name: meta.sexpr.clojure
+    patterns:
+    - include: '#list'
+    - include: '#vec'
+
+  list:
+    name: meta.sexpr.list.clojure
+    begin: (\()(?!\))
+    end: (?<!\()(\))
+    beginCaptures:
+      '0': {name: entity.sequence.start}
+    endCaptures:
+      '0': {name: entity.sequence.end}
+    patterns:
+    - include: '#all'
+
+  vec:
+    name: meta.vec.clojure
+    begin: (\[)(?!\])
+    end: (?<!\[)(\])
+    beginCaptures:
+      '0': {name: entity.sequence.start}
+    endCaptures:
+      '1': {name: entity.sequence.end}
+    patterns:
+    - include: '#all'
+
+
+  number:
+    patterns:
+    - include: '#float'
+    - include: '#integer'
+
+  float:
+    name: float
+    match: (\-?[0-9]+\.[0-9]+)
+
+  integer:
+    name: integer
+    match: (0|\-?[1-9][0-9]*)
+
+  symbol:
+    name: symbol
+    match: \b(?<character>[^\(\)\[\]\{\}\;\^\~\`\'\"\@\ \n\r\t\:\/\#\\])((\g<character>)|[0-9\#\%\'])*\b
+
+  keyword:
+    name: meta.keyword.clojure
+    match: ([\:][^\(\)\[\]\{\}\;\^\~\`\'\"\@\ \n\r\t\:\/\#\\]*)
+
+  regex:
+    patterns:
+    - name: string.quoted.regex.clojure
+      begin: '#"'
+      end: '"'
+      patterns:
+      - include: '#string_escape'
+
+  string:
+    patterns:
+    - name: string.quoted.double.clojure
+      begin: '"'
+      end: '"'
+      patterns:
+      - include: '#string_escape'
+
+  string_escape:
+    name: constant.character.escape.clojure
+    match: \\(.)

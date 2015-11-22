@@ -10,8 +10,8 @@
 	 "context": [
 		{"key": "setting.arcadia_repl", "operator": "equal", "operand": true },
 		{"key": "auto_complete_visible", "operator": "equal", "operand": false }]},
-	{"keys": ["shift+ctrl+c"], "command": "arcadia_repl_clear", "args": {},
+	{"keys": ["alt+c"], "command": "arcadia_repl_clear", "args": {},
 	 "context":[{"key": "setting.arcadia_repl", "operator": "equal", "operand": true }]},
-	{"keys": ["alt+shift+s"], "command": "arcadia_repl_transfer", "args": {"scope": "selection"}},
-	{"keys": ["alt+shift+enter"], "command": "arcadia_repl_transfer", "args": {"scope": "file"}},
+	{"keys": ["alt+shift+\\"], "command": "arcadia_repl_transfer", "args": {"scope": "selection"}},
+	{"keys": ["alt+shift+/"], "command": "arcadia_repl_transfer", "args": {"scope": "file"}},
 	{"keys": ["alt+enter"], "command": "arcadia_repl_transfer", "args": {"scope": "block"}}] 
