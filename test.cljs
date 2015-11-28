@@ -15,6 +15,8 @@
 	($ "<style>#chart{font-size:.7em; font-family:courier;} 
 			.column{display:inline-block; width:150px; border-right:1px solid black; padding:.2em .5em; border-bottom:1px dotted silver;}</style>"))
 
+thing.core
+
 (ns rainbow.sexpress)
 
 (quote [

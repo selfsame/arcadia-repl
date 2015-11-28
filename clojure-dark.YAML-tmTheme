@@ -119,6 +119,26 @@ settings:
   settings:
     foreground: '#984CFF'
 
+- name: deref
+  scope: meta.deref
+  settings:
+    foreground: '#3CFF00'
+
+- name: special
+  scope: meta.special
+  settings:
+    foreground: '#3CFF00'
+
+- name: special_form
+  scope: 'meta.special_form, meta.special_form meta.sexpr entity.sequence'
+  settings:
+    foreground: '#E65DFF'
+
+- name: special_form
+  scope: 'meta.special_form meta.special_form, meta.special_form meta.special_form meta.sexpr entity.sequence'
+  settings:
+    foreground: '#0DFE01'
+
 - name: string_quoted
   scope: 'string.quoted.double.clojure'
   settings:
@@ -144,3 +164,11 @@ settings:
   settings:
     background: '#FF0000'
     foreground: '#000000'
+
+
+- name: repl_prompt
+  scope: 'meta.symbol.repl_prompt'
+  settings:
+    fontStyle: 'bold italic'
+    background: '#000000'
+    foreground: '#FFC500'

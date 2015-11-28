@@ -41,6 +41,13 @@
 			<key>name</key>
 			<string>comment.line.clojure</string>
 		</dict>
+		<key>deref</key>
+		<dict>
+			<key>match</key>
+			<string>([\@])</string>
+			<key>name</key>
+			<string>meta.deref.clojure</string>
+		</dict>
 		<key>expr</key>
 		<dict>
 			<key>patterns</key>
@@ -55,11 +62,23 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#repl_prompt</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#regex</string>
 				</dict>
 				<dict>
 					<key>include</key>
 					<string>#sexpr</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#special_form</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#deref</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -163,6 +182,13 @@
 				</dict>
 			</array>
 		</dict>
+		<key>repl_prompt</key>
+		<dict>
+			<key>match</key>
+			<string>([\n]|^)([^\(\)\[\]\{\}\;\^\~\`\'\"\@\ \n\r\t\:\/\#\\]+►)</string>
+			<key>name</key>
+			<string>meta.symbol.repl_prompt</string>
+		</dict>
 		<key>sexpr</key>
 		<dict>
 			<key>name</key>
@@ -176,6 +202,31 @@
 				<dict>
 					<key>include</key>
 					<string>#vec</string>
+				</dict>
+			</array>
+		</dict>
+		<key>special</key>
+		<dict>
+			<key>match</key>
+			<string>([\`\~\'\@])</string>
+			<key>name</key>
+			<string>meta.special.clojure</string>
+		</dict>
+		<key>special_form</key>
+		<dict>
+			<key>begin</key>
+			<string>([\`\~\'\@]+)</string>
+			<key>contentName</key>
+			<string>meta.specialized.clojure</string>
+			<key>end</key>
+			<string>([ \n\t\r])</string>
+			<key>name</key>
+			<string>meta.special_form.clojure</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#all</string>
 				</dict>
 			</array>
 		</dict>

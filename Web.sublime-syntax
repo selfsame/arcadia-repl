@@ -1,0 +1,18 @@
+%YAML 1.2
+---
+name: Web
+file_extensions: [html, js, css]
+scope: source.web
+
+contexts:
+  main:
+    - match: <script>
+      push: Packages/JavaScript/JavaScript.sublime-syntax
+      with_prototype:
+        - match: (?=</script>)
+          pop: true
+    - match: "<"
+      scope: punctuation.definition.tag.begin
+    - match: ">"
+      scope: punctuation.definition.tag.end
+

@@ -37,7 +37,8 @@ def send_repl(text):
     sock.sendto(text.encode('utf-8'), (UDP_IP, UDP_PORT))
 
 def format_input_text(text):
-    res = text.replace("=>", ">", 1).replace("\r", "")
+    print(text)
+    res = text.replace("=>", "►", 1).replace("\r", "")
     error = re.findall(r"(\w[^:\W\n]+): ([^\n]+)\n", res)
     if len(error) > 0:
         _ns = re.split("\n", res)[-1]

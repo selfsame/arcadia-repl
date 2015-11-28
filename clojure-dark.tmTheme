@@ -285,6 +285,50 @@
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>deref</string>
+			<key>scope</key>
+			<string>meta.deref</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#3CFF00</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>special</string>
+			<key>scope</key>
+			<string>meta.special</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#3CFF00</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>special_form</string>
+			<key>scope</key>
+			<string>meta.special_form, meta.special_form meta.sexpr entity.sequence</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#E65DFF</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>special_form</string>
+			<key>scope</key>
+			<string>meta.special_form meta.special_form, meta.special_form meta.special_form meta.sexpr entity.sequence</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#0DFE01</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
 			<string>string_quoted</string>
 			<key>scope</key>
 			<string>string.quoted.double.clojure</string>
@@ -337,6 +381,21 @@
 				<string>#FF0000</string>
 				<key>foreground</key>
 				<string>#000000</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>repl_prompt</string>
+			<key>scope</key>
+			<string>meta.symbol.repl_prompt</string>
+			<key>settings</key>
+			<dict>
+				<key>background</key>
+				<string>#000000</string>
+				<key>fontStyle</key>
+				<string>bold italic</string>
+				<key>foreground</key>
+				<string>#FFC500</string>
 			</dict>
 		</dict>
 	</array>

@@ -9,7 +9,6 @@ patterns:
 - include: '#all'
 
 repository:
-
   comment:
     name: comment.line.clojure
     match: ;.*$\n?
@@ -23,8 +22,11 @@ repository:
     patterns:
     - include: '#string_escape'
     - include: '#string'
+    - include: '#repl_prompt'
     - include: '#regex'
     - include: '#sexpr'
+    - include: '#special_form'
+    - include: '#deref'
     - include: '#keyword'
     - include: '#number'
     - include: '#symbol'
@@ -57,7 +59,6 @@ repository:
     patterns:
     - include: '#all'
 
-
   number:
     patterns:
     - include: '#float'
@@ -75,9 +76,30 @@ repository:
     name: symbol
     match: \b(?<character>[^\(\)\[\]\{\}\;\^\~\`\'\"\@\ \n\r\t\:\/\#\\])((\g<character>)|[0-9\#\%\'])*\b
 
+  special_form:
+    name: meta.special_form.clojure
+    begin: ([\`\~\'\@]+)
+    end: ([ \n\t\r])
+    contentName: meta.specialized.clojure
+    patterns:
+    - include: '#all'
+
+  special:
+    name: meta.special.clojure
+    match: ([\`\~\'\@])
+
+  deref:
+    name: meta.deref.clojure
+    match: ([\@])
+
   keyword:
     name: meta.keyword.clojure
     match: ([\:][^\(\)\[\]\{\}\;\^\~\`\'\"\@\ \n\r\t\:\/\#\\]*)
+
+  repl_prompt:
+    name: meta.symbol.repl_prompt
+    match: ([\n]|^)([^\(\)\[\]\{\}\;\^\~\`\'\"\@\ \n\r\t\:\/\#\\]+►)
+
 
   regex:
     patterns:
