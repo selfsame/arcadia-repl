@@ -3,7 +3,7 @@
 (farts)foo 
 (thing) foo
 
- 
+ '[foo `(bar )]asdf [foo ]
 
 #_ 
   (ns learnnext.core
@@ -30,9 +30,10 @@ foo.core/*baz*
 ($/append ($ "head") 
 	($ "<style>#chart{font-size:.7em; font-family:courier;} 
 			.column{display:inline-block; width:150px; border-right:1px solid black; padding:.2em .5em; border-bottom:1px dotted silver;}</style>"))
-@sdgf '(@( 'foo))
+@sdgf '(@( 'foo)) asfg sdf
 dfg
-'(ts.core/foo (:sldjf 37 ) )
+'(ts.core/foo (:sldjf 37 )) asdf
+
 @( '( @(+ 1 '(* 3 1) ) ))
 
 
@@ -129,8 +130,8 @@ fo.bazo/core
 
 
 #_ rainbows
-(((((((((((( ))))))))))))
-[({[({[({[({})]})]})]})]
+((((((((((((()))))))))))))
+[({[({[({[({[]})]})]})]})]
 
 #_ symbols
 methods userland foo.core/qualified
@@ -139,38 +140,40 @@ methods userland foo.core/qualified
 12 2.9 3/6 0xBADA55 9r8012 07123 -1.2e-5 4.2M 18N 
 :keyword ::qualified :foo.core/resolved
 "Jane's sign said \"welcome\""
+#<GameObject Foo (UnityEngine.GameObject)>
 
 #_ specials
-@ (atomic) @foo
-'(#(re-find #"rgb$\(" (str %3)))
+@(atomic) @foo
+'( #(re-find #"rgb$\(" (str %3)))
 
-'(reader [quoted (form)])
+'(reader [quoted @(form)])
 
 #_ macro-specials
 (defmacro fun [sym args & code] 
-  `(do   
-      (prn ~sym)
+  `(do
+      (prn ~[sym args])
       (comment (def ~'foo 7))
       (def ~sym [~'a b] 
         ~@code)))
-{:a b}
+
 ;TODO illegalize
-[foo/ /baz  %1 ::foo.bar/quaz .67 #(#()) n.s]
+[foo/ /baz  %1 ::foo.bar/quaz .67 #(#()) {1 2 3}]
 ;TODO legalize
-[:./d :. :./. {1 2 3}]
-:foo/cat
+[:./d :. :./. ]
+
 ;TODO scope
-[*print-length* #'foo foo#
- #?(:cljs reader-conditional) ^{:meta 'form}]
+[clojure.pprint/*thing* #'foo foo#
+ #?(:cljs reader-conditional) ^{:meta 'form }]
 
-(foocore/baz.sad)
-foo.core/baz.sad
-
-#<GameObject New Game Object (UnityEngine.GameObject)>
+;TODO fix-sexpr
+[ {'foo}]
 
 
-#
 
+
+
+
+#_
 (defn baz [a b c]
   (map 
     (comp ;ridic
@@ -201,7 +204,7 @@ clojure.string/lowercase
 #_  asdf adf 
 
 gii
-(defui Widget
+#_ (defui Widget
 	static om/IQueryParams
   (params [this]
     {:start 0 :end 5})

@@ -24,54 +24,52 @@ settings:
 
 
 
-- name: sexpr
-  scope: 'meta.sexpr entity.sequence'
-  settings:
-    foreground: '#AF4723'
-- name: sexpr2
-  scope: 'meta.sexpr meta.sexpr entity.sequence'
-  settings:
-    foreground: '#12A2EC'
-- name: sexpr3
-  scope: 'meta.sexpr meta.sexpr meta.sexpr entity.sequence'
-  settings:
-    foreground: '#F5A61C'
-- name: sexpr4
-  scope: 'meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence'
-  settings:
-    foreground: '#30A308'
-- name: sexpr5
-  scope: 'meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence'
-  settings:
-    foreground: '#733ADE'
-- name: sexpr6
-  scope: 'meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence'
-  settings:
-    foreground: '#6AAA2C'
-- name: sexpr7
-  scope: 'meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence'
-  settings:
-    foreground: '#A52F01'
-- name: sexpr8
-  scope: 'meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence'
-  settings:
-    foreground: '#5660E9'
-- name: sexpr9
-  scope: 'meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence'
-  settings:
-    foreground: '#D5812E'
-- name: sexpr10
-  scope: 'meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence'
-  settings:
-    foreground: '#909090'
+- scope: 'sexpr'
+  settings: {foreground: '#FF5400' }
+
+- scope: 'sexpr sexpr'
+  settings: { foreground: '#0078FF' }
+
+- scope: 'sexpr sexpr sexpr'
+  settings: { foreground: '#940000' }
+
+- scope: 'sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#516AFF' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#079F0E' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#F0FF00' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#6600FF' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#92DE26' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#99553D' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#593FAC' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#007C37' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#6E5500' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#868686' }
 
 
 
 
 - name: word
-  scope: 'word'
+  scope: 'word, qualified'
   settings:
-    foreground: '#744F38'
+    foreground: '#927462'
 
 - name: dymaic
   scope: 'word.dynamic'
@@ -91,12 +89,14 @@ settings:
     foreground: '#357333'  
  
 
+
+
 - name: keyword
-  scope: 'meta.keyword, meta.keyword qualified namespace, meta.keyword qualified word'
+  scope: 'meta.keyword, meta.keyword qualified namespace, meta.keyword word, meta.keyword qualified'
   settings:
     foreground: '#984CFF'
 
-- name: keyword
+- name: keyword_qualified
   scope: 'meta.keyword.qualified, meta.keyword.qualified qualified namespace, meta.keyword.qualified word, meta.keyword.qualified word'
   settings:
     foreground: '#C01AFE'
@@ -117,7 +117,7 @@ settings:
   scope: string.quoted.regex.clojure
   settings:
     fontStyle: bold
-    background: '#072705'
+    background: '#1F0307'
     foreground: '#96FF00'
 
 - name: char
@@ -132,14 +132,16 @@ settings:
 
 
 - name: special.quote
-  scope: 'meta.special.quote, meta.special.quote meta.sexpr entity.sequence'
+  scope: 'meta.special.quote, meta.special.quote sexpr'
   settings:
-    background: '#171F12'
+    background: '#0D1436'
 
 - name: special.deref
-  scope: 'meta.special.deref, meta.special.deref meta.sexpr entity.sequence, meta.special.quote meta.special.deref, meta.special.quote meta.special.deref meta.sexpr entity.sequence'
+  scope: 'meta.special.deref, meta.special.deref sexpr'
   settings:
-    foreground: '#3CFF00'
+    fontStyle: 'bold'
+    foreground: '#FFEA00'
+    background: '#0C2602'
 
 - name: special.lambda
   scope: 'meta.special.lambda'
@@ -148,19 +150,19 @@ settings:
     foreground: '#00D8FF'
 
 - name: special.backtick
-  scope: 'meta.special.backtick, meta.special.backtick meta.sexpr entity.sequence'
+  scope: 'meta.special.backtick, meta.special.backtick sexpr'
   settings:
     foreground: '#FF0000'
     background: '#2C0713'
 
 - name: special.unquote
-  scope: 'meta.special.unquote, meta.special.unquote meta.sexpr entity.sequence'
+  scope: 'meta.special.unquote, meta.special.unquote sexpr'
   settings:
-    foreground: '#B9B9B9'
+    foreground: '#3DFF00'
     background: '#151212'
 
 - name: special.ignore
-  scope: 'meta.special.ignore, meta.special.ignore meta.sexpr entity.sequence, meta.special.ignore symbol.clojure.core'
+  scope: 'meta.special.ignore'
   settings:
     background: '#0F1214'
     foreground: '#343F51'
@@ -238,7 +240,8 @@ settings:
 - name: comment.TODO
   scope: 'comment.TODO'
   settings:
-    foreground: '#E3505E'
+    foreground: '#C326C1'
+    background: '#000000'
 
 - name: comment.TODO.text
   scope: 'comment.TODO.text'
@@ -246,7 +249,7 @@ settings:
     foreground: '#949494'
 
 - name: repl_prompt
-  scope: 'meta.symbol.repl_prompt'
+  scope: 'meta.repl_prompt'
   settings:
     fontStyle: 'bold italic'
     background: '#000000'

@@ -9,47 +9,6 @@ patterns:
 - include: '#all'
 
 repository:
-  comment_anything:
-    name: comment_anything
-    patterns:
-    - name: nonbracket
-      match: ([^\(\)\[\]]*)
-    - include: '#comment_list'
-    - include: '#comment_vector'
-
-  comment_list:
-    name: comment_list
-    begin: (\()
-    end: (\))
-    patterns:
-    - include: '#comment_anything'
-
-  comment_vector:
-    name: comment_vector
-    begin: (\[)
-    end: (\])
-    patterns:
-    - include: '#comment_anything'
-
-  comment:
-    name: comment.line.clojure
-    patterns:
-    - name: comment.line.clojure
-      begin: ;
-      end: $\n?
-      patterns: 
-      - name: comment.TODO
-        match: (TODO)(.*)
-        captures:
-          '2': {name: comment.TODO.text}
-      - match: .*
-    - name: comment.macro.clojure
-      begin: \(comment
-      end: \)
-      contentName: comment.form.clojure
-      patterns:
-      - include: '#comment_anything'
-
   all:
     patterns:
     - include: '#comment'
@@ -71,78 +30,114 @@ repository:
     - include: '#symbol'
 
 
+
+
+  comment:
+    name: comment.line.clojure
+    patterns:
+    - name: comment.line.clojure
+      begin: ;
+      end: $\n?
+      patterns: 
+      - name: comment.TODO
+        match: (TODO)(.*)
+        captures:
+          '2': {name: comment.TODO.text}
+      - match: .*
+    - name: comment.macro.clojure
+      begin: \(comment
+      end: \)
+      contentName: comment.form.clojure
+      patterns:
+      - include: '#shadow_all'
+
+
+
+
+
+
+
+
+
   sexpr:
-    name: meta.sexpr.clojure
     patterns:
-    - include: '#list'
-    - include: '#vec'
-    - include: '#set'
-    - include: '#hashmap'
+    - name: sexpr.list
+      begin: (\()
+      end: (\))
+      patterns:
+      - include: '#all'
+      - include: '#newline'
+      - include: '#indentation'
+    - name: sexpr.vec
+      begin: (\[)
+      end: (\])
+      patterns:
+      - include: '#all'
+      - include: '#newline'
+      - include: '#indentation'
+    - name: sexpr.set
+      begin: (\#{)
+      end: (\})
+      patterns:
+      - include: '#all'
+      - include: '#newline'
+      - include: '#indentation'
+    - name: sexpr.hashmap
+      begin: (\{)
+      end: (\})
+      patterns:
+      - include: '#all'
+      - include: '#newline'
+      - include: '#indentation'
 
-  list:
-    name: meta.sexpr.list.clojure
-    begin: (\()
-    end: (\))
-    beginCaptures:
-      '0': {name: entity.sequence.start}
-    endCaptures:
-      '0': {name: entity.sequence.end}
+  shadow_all:
     patterns:
-    - include: '#all'
-    - include: '#newline'
-    - include: '#indentation'
+    - include: '#shadow_sexpr'
+    - name: shadow_word
+      match: ([^\(\)\{\}\[\]\s]+)
 
-  vec:
-    name: meta.sexpr.vec.clojure
-    begin: (\[)
-    end: (\])
-    beginCaptures:
-      '0': {name: entity.sequence.start}
-    endCaptures:
-      '1': {name: entity.sequence.end}
+  shadow_sexpr:
     patterns:
-    - include: '#all'
-    - include: '#newline'
-    - include: '#indentation'
+    - name: shadow.sexpr.list
+      begin: (\()
+      end: (\))
+      patterns:
+      - include: '#shadow_all'
+    - name: shadow.sexpr.vec
+      begin: (\[)
+      end: (\])
+      patterns:
+      - include: '#shadow_all'
+    - name: shadow.sexpr.set
+      begin: (\#{)
+      end: (\})
+      patterns:
+      - include: '#shadow_all'
+    - name: shadow.sexpr.hashmap
+      begin: (\{)
+      end: (\})
+      patterns:
+      - include: '#shadow_all'
 
-  set:
-    name: meta.sexpr.set.clojure
-    begin: (\#{)
-    end: (\})
-    beginCaptures:
-      '0': {name: entity.sequence.start}
-    endCaptures:
-      '1': {name: entity.sequence.end}
-    patterns:
-    - include: '#all'
-    - include: '#newline'
-    - include: '#indentation'
 
-  hashmap:
-    name: meta.sexpr.hashmap.clojure
-    begin: (\{)
-    end: (\})
-    beginCaptures:
-      '0': {name: entity.sequence.start}
-    endCaptures:
-      '1': {name: entity.sequence.end}
-    patterns:
-    - include: '#all'
-    - include: '#newline'
-    - include: '#indentation'
+
+
+
+
+
 
 
   special_form:
     name: meta.special
     patterns:
-    - name: meta.special.deref
-      begin: ([@][\n\r \s]*)
+    - name: meta.special.quote
+      begin: (['][\n\r \s]*)
       applyEndPatternLast: 1
       patterns:
       - include: '#all'
       end: (?=[\s\)\(\[\]])
-    - name: meta.special.quote
-      begin: (['][\n\r \s]*)
+    - name: meta.special.deref
+      begin: ([@][\n\r \s]*)
       applyEndPatternLast: 1
       patterns:
       - include: '#all'
@@ -175,11 +170,10 @@ repository:
         '0': {name: meta.special.ignore.form}
       applyEndPatternLast: 1
       patterns:
-      - include: '#comment_list'
-      - include: '#comment_vector'
-      - name: junk
-        match: ([^\s\r\n \(\[]+)
+      - include: '#shadow_all'
       end: (?=[\s\r\n \(\[])
+
+
 
 
 
@@ -207,6 +201,40 @@ repository:
     - include: '#word'
     end: (?=.)
 
+
+
+
+
+
+  argument_literal:
+    name: meta.lambda.argument
+    match: (%(&|([1-9][0-9]*))?)
+
+  regex:
+    patterns:
+    - name: string.quoted.regex.clojure
+      begin: '#"'
+      end: '"'
+      patterns:
+      - include: '#string_escape'
+
+  string:
+    patterns:
+    - name: string.quoted.double.clojure
+      begin: '"'
+      end: '"'
+      patterns:
+      - include: '#string_escape'
+
+  string_escape:
+    name: constant.character.escape.clojure
+    match: \\(.)
+
+
+
+
+
+
   symbol:
     name: symbol
     patterns:
@@ -229,35 +257,13 @@ repository:
     name: word
     match: ((?<c>[^\(\)\[\]{};#%\^~`'":@\s\/\\\. ])(\g<c>|[0-9#%'\*\.])*)
 
-  argument_literal:
-    name: meta.lambda.argument
-    match: (%(&|([1-9][0-9]*))?)
 
 
-  repl_prompt:
-    name: meta.repl_prompt
-    match: ([\n]|^)((?<c>[^\(\)\[\]{};#%\^~`'":@\s\/\\])+►)
 
 
-  regex:
-    patterns:
-    - name: string.quoted.regex.clojure
-      begin: '#"'
-      end: '"'
-      patterns:
-      - include: '#string_escape'
 
-  string:
-    patterns:
-    - name: string.quoted.double.clojure
-      begin: '"'
-      end: '"'
-      patterns:
-      - include: '#string_escape'
 
-  string_escape:
-    name: constant.character.escape.clojure
-    match: \\(.)
+
 
 
 
@@ -335,9 +341,9 @@ repository:
     name: number.integer
     match: (0|\-?[1-9][0-9]*)
 
-  constant:
-    name: meta.constant.clojure
-    match: (true|false|nil)
+
+
+
 
 
   newline:
@@ -348,6 +354,21 @@ repository:
     name: meta.indent
     match: ^([\s]*)
 
+
+  constant:
+    name: meta.constant.clojure
+    match: (true|false|nil)
+
+
+
+
   core_var:
     name: storage.clojure.core
     match: (\*agent\*|\*clojure-version\*|\*command-line-args\*|\*compile-files\*|\*compile-path\*|\*compiler-options\*|\*data-readers\*|\*default-data-reader-fn\*|\*e|\*err\*|\*file\*|\*flush-on-newline\*|\*in\*|\*ns\*|\*out\*|\*print-dup\*|\*print-length\*|\*print-level\*|\*print-meta\*|\*print-readably\*|\*read-eval\*|\*unchecked-math\*|\*warn-on-reflection\*|\+|-|->|->>|->ArrayChunk|->Eduction|->Vec|->VecNode|->VecSeq|<|<=|=|==|>|>=|Throwable->map|accessor|aclone|add-classpath|add-watch|agent|agent-error|agent-errors|aget|alength|alias|all-ns|alter|alter-meta!|alter-var-root|amap|ancestors|and|apply|areduce|array-map|as->|aset|aset-boolean|aset-byte|aset-char|aset-double|aset-float|aset-int|aset-long|aset-short|assert|assoc|assoc!|assoc-in|associative?|atom|await|await-for|bases|bean|bigdec|bigint|biginteger|binding|bit-and|bit-and-not|bit-clear|bit-flip|bit-not|bit-or|bit-set|bit-shift-left|bit-shift-right|bit-test|bit-xor|boolean|boolean-array|booleans|bound-fn|bound-fn\*|bound?|butlast|byte|byte-array|bytes|case|cast|cat|catch|char|char-array|char-escape-string|char-name-string|char?|chars|class|class?|clear-agent-errors|clojure-version|coll?|comment|commute|comp|comparator|compare|compare-and-set!|compile|complement|completing|concat|cond|cond->|cond->>|condp|conj|conj!|cons|constantly|construct-proxy|contains?|count|counted?|create-ns|create-struct|cycle|dec|decimal?|declare|dedupe|def|default-data-readers|definline|definterface|defmacro|defmethod|defmulti|defn|defn-|defonce|defprotocol|defrecord|defstruct|deftype|delay|delay?|deliver|denominator|deref|derive|descendants|disj|disj!|dissoc|dissoc!|distinct|distinct?|do|doall|dorun|doseq|dosync|dotimes|doto|double|double-array|doubles|drop|drop-last|drop-while|eduction|empty|empty?|ensure|ensure-reduced|enumeration-seq|error-handler|error-mode|eval|even?|every-pred|every?|ex-data|ex-info|extend|extend-protocol|extend-type|extenders|extends?|false?|ffirst|file-seq|filter|filterv|finally|find|find-keyword|find-ns|find-var|first|flatten|float|float-array|float?|floats|flush|fn|fn?|fnext|fnil|for|force|format|frequencies|future|future-call|future-cancel|future-cancelled?|future-done?|future?|gen-class|gen-interface|gensym|get|get-in|get-method|get-proxy-class|get-thread-bindings|get-validator|group-by|hash|hash-map|hash-ordered-coll|hash-set|hash-unordered-coll|identical?|identity|if|if-let|if-not|if-some|ifn?|import|in-ns|inc|init-proxy|instance?|int|int-array|integer?|interleave|intern|interpose|into|into-array|ints|io!|isa?|iterate|iterator-seq|juxt|keep|keep-indexed|key|keys|keyword|keyword?|last|lazy-cat|lazy-seq|let|letfn|line-seq|list|list\*|list?|load|load-file|load-reader|load-string|loaded-libs|locking|long|long-array|longs|loop|macroexpand|macroexpand-1|make-array|make-hierarchy|map|map-indexed|map?|mapcat|mapv|max|max-key|memfn|memoize|merge|merge-with|meta|methods|min|min-key|mix-collection-hash|mod|monitor-enter|monitor-exit|name|namespace|namespace-munge|neg?|new|newline|next|nfirst|nil?|nnext|not|not-any?|not-empty|not-every?|not=|ns|ns-aliases|ns-imports|ns-interns|ns-map|ns-name|ns-publics|ns-refers|ns-resolve|ns-unalias|ns-unmap|nth|nthnext|nthrest|num|number?|numerator|object-array|odd?|or|parents|partial|partition|partition-all|partition-by|pcalls|peek|persistent!|pmap|pop|pop!|pop-thread-bindings|pos?|pr|pr-str|prefer-method|prefers|print|print-str|printf|println|println-str|prn|prn-str|promise|proxy|proxy-mappings|proxy-super|push-thread-bindings|pvalues|quot|quote|rand|rand-int|rand-nth|random-sample|range|ratio?|rational?|rationalize|re-find|re-groups|re-matcher|re-matches|re-pattern|re-seq|read|read-line|read-string|reader-conditional|reader-conditional?|realized?|record?|recur|reduce|reduce-kv|reduced|reduced?|reductions|ref|ref-history-count|ref-max-history|ref-min-history|ref-set|refer|refer-clojure|reify|release-pending-sends|rem|remove|remove-all-methods|remove-method|remove-ns|remove-watch|repeat|repeatedly|replace|replicate|require|reset!|reset-meta!|resolve|rest|restart-agent|resultset-seq|reverse|reversible?|rseq|rsubseq|run!|satisfies?|second|select-keys|send|send-off|send-via|seq|seq?|seque|sequence|sequential?|set|set!|set-agent-send-executor!|set-agent-send-off-executor!|set-error-handler!|set-error-mode!|set-validator!|set?|short|short-array|shorts|shuffle|shutdown-agents|slurp|some|some->|some->>|some-fn|some?|sort|sort-by|sorted-map|sorted-map-by|sorted-set|sorted-set-by|sorted?|special-symbol?|spit|split-at|split-with|str|string?|struct|struct-map|subs|subseq|subvec|supers|swap!|symbol|symbol?|sync|tagged-literal|tagged-literal?|take|take-last|take-nth|take-while|test|the-ns|thread-bound?|throw|time|to-array|to-array-2d|trampoline|transduce|transient|tree-seq|true?|try|type|unchecked-add|unchecked-add-int|unchecked-byte|unchecked-char|unchecked-dec|unchecked-dec-int|unchecked-divide-int|unchecked-double|unchecked-float|unchecked-inc|unchecked-inc-int|unchecked-int|unchecked-long|unchecked-multiply|unchecked-multiply-int|unchecked-negate|unchecked-negate-int|unchecked-remainder-int|unchecked-short|unchecked-subtract|unchecked-subtract-int|underive|unreduced|unsigned-bit-shift-right|update|update-in|update-proxy|use|val|vals|var|var-get|var-set|var?|vary-meta|vec|vector|vector-of|vector?|volatile!|volatile?|vreset!|vswap!|when|when-first|when-let|when-not|when-some|while|with-bindings|with-bindings\*|with-in-str|with-local-vars|with-meta|with-open|with-out-str|with-precision|with-redefs|with-redefs-fn|xml-seq|zero?|zipmap|->Cat|append!|cat|drop|filter|flatten|fold|foldcat|folder|map|mapcat|monoid|reduce|reducer|remove|take|take-while)(?=[\(\)\[\]{};#%\^~`'":@\s\/\\\.])
+
+
+
+
+  repl_prompt:
+    name: meta.repl_prompt
+    match: ([\n]|^)((?<c>[^\(\)\[\]{};#%\^~`'":@\s\/\\])+►)

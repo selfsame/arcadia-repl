@@ -60,7 +60,7 @@ repository:
     patterns:
     - include: '#shadow_sexpr'
     - name: shadow_word
-      # match: ([^\(\)\{\}\[\]\s]+)
+      match: ([^\(\)\{\}\[\]\s]+)
 
   shadow_sexpr:
     patterns:

@@ -208,63 +208,9 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#comment_anything</string>
+							<string>#shadow_all</string>
 						</dict>
 					</array>
-				</dict>
-			</array>
-		</dict>
-		<key>comment_anything</key>
-		<dict>
-			<key>name</key>
-			<string>comment_anything</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>match</key>
-					<string>([^\(\)\[\]]*)</string>
-					<key>name</key>
-					<string>nonbracket</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#comment_list</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#comment_vector</string>
-				</dict>
-			</array>
-		</dict>
-		<key>comment_list</key>
-		<dict>
-			<key>begin</key>
-			<string>(\()</string>
-			<key>end</key>
-			<string>(\))</string>
-			<key>name</key>
-			<string>comment_list</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#comment_anything</string>
-				</dict>
-			</array>
-		</dict>
-		<key>comment_vector</key>
-		<dict>
-			<key>begin</key>
-			<string>(\[)</string>
-			<key>end</key>
-			<string>(\])</string>
-			<key>name</key>
-			<string>comment_vector</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#comment_anything</string>
 				</dict>
 			</array>
 		</dict>
@@ -295,46 +241,6 @@
 			<string>(\-?[0-9]+\.[0-9]+)</string>
 			<key>name</key>
 			<string>number.float</string>
-		</dict>
-		<key>hashmap</key>
-		<dict>
-			<key>begin</key>
-			<string>(\{)</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>entity.sequence.start</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>(\})</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>entity.sequence.end</string>
-				</dict>
-			</dict>
-			<key>name</key>
-			<string>meta.sexpr.hashmap.clojure</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#all</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#newline</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#indentation</string>
-				</dict>
-			</array>
 		</dict>
 		<key>hexadecimal</key>
 		<dict>
@@ -388,46 +294,6 @@
 				<dict>
 					<key>include</key>
 					<string>#unqualified_keyword</string>
-				</dict>
-			</array>
-		</dict>
-		<key>list</key>
-		<dict>
-			<key>begin</key>
-			<string>(\()</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>entity.sequence.start</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>(\))</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>entity.sequence.end</string>
-				</dict>
-			</dict>
-			<key>name</key>
-			<string>meta.sexpr.list.clojure</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#all</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#newline</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#indentation</string>
 				</dict>
 			</array>
 		</dict>
@@ -613,67 +479,183 @@
 			<key>name</key>
 			<string>number.scientific</string>
 		</dict>
-		<key>set</key>
+		<key>sexpr</key>
 		<dict>
-			<key>begin</key>
-			<string>(\#{)</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>entity.sequence.start</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>(\})</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>entity.sequence.end</string>
-				</dict>
-			</dict>
-			<key>name</key>
-			<string>meta.sexpr.set.clojure</string>
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>include</key>
-					<string>#all</string>
+					<key>begin</key>
+					<string>(\()</string>
+					<key>end</key>
+					<string>(\))</string>
+					<key>name</key>
+					<string>sexpr.list</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#all</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#newline</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#indentation</string>
+						</dict>
+					</array>
 				</dict>
 				<dict>
-					<key>include</key>
-					<string>#newline</string>
+					<key>begin</key>
+					<string>(\[)</string>
+					<key>end</key>
+					<string>(\])</string>
+					<key>name</key>
+					<string>sexpr.vec</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#all</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#newline</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#indentation</string>
+						</dict>
+					</array>
 				</dict>
 				<dict>
-					<key>include</key>
-					<string>#indentation</string>
+					<key>begin</key>
+					<string>(\#{)</string>
+					<key>end</key>
+					<string>(\})</string>
+					<key>name</key>
+					<string>sexpr.set</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#all</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#newline</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#indentation</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(\{)</string>
+					<key>end</key>
+					<string>(\})</string>
+					<key>name</key>
+					<string>sexpr.hashmap</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#all</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#newline</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#indentation</string>
+						</dict>
+					</array>
 				</dict>
 			</array>
 		</dict>
-		<key>sexpr</key>
+		<key>shadow_all</key>
 		<dict>
-			<key>name</key>
-			<string>meta.sexpr.clojure</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#list</string>
+					<string>#shadow_sexpr</string>
 				</dict>
 				<dict>
-					<key>include</key>
-					<string>#vec</string>
+					<key>match</key>
+					<string>([^\(\)\{\}\[\]\s]+)</string>
+					<key>name</key>
+					<string>shadow_word</string>
+				</dict>
+			</array>
+		</dict>
+		<key>shadow_sexpr</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>(\()</string>
+					<key>end</key>
+					<string>(\))</string>
+					<key>name</key>
+					<string>shadow.sexpr.list</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#shadow_all</string>
+						</dict>
+					</array>
 				</dict>
 				<dict>
-					<key>include</key>
-					<string>#set</string>
+					<key>begin</key>
+					<string>(\[)</string>
+					<key>end</key>
+					<string>(\])</string>
+					<key>name</key>
+					<string>shadow.sexpr.vec</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#shadow_all</string>
+						</dict>
+					</array>
 				</dict>
 				<dict>
-					<key>include</key>
-					<string>#hashmap</string>
+					<key>begin</key>
+					<string>(\#{)</string>
+					<key>end</key>
+					<string>(\})</string>
+					<key>name</key>
+					<string>shadow.sexpr.set</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#shadow_all</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(\{)</string>
+					<key>end</key>
+					<string>(\})</string>
+					<key>name</key>
+					<string>shadow.sexpr.hashmap</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#shadow_all</string>
+						</dict>
+					</array>
 				</dict>
 			</array>
 		</dict>
@@ -687,11 +669,11 @@
 					<key>applyEndPatternLast</key>
 					<integer>1</integer>
 					<key>begin</key>
-					<string>([@][\n\r \s]*)</string>
+					<string>(['][\n\r \s]*)</string>
 					<key>end</key>
 					<string>(?=[\s\)\(\[\]])</string>
 					<key>name</key>
-					<string>meta.special.deref</string>
+					<string>meta.special.quote</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -704,11 +686,11 @@
 					<key>applyEndPatternLast</key>
 					<integer>1</integer>
 					<key>begin</key>
-					<string>(['][\n\r \s]*)</string>
+					<string>([@][\n\r \s]*)</string>
 					<key>end</key>
 					<string>(?=[\s\)\(\[\]])</string>
 					<key>name</key>
-					<string>meta.special.quote</string>
+					<string>meta.special.deref</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -802,17 +784,7 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#comment_list</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#comment_vector</string>
-						</dict>
-						<dict>
-							<key>match</key>
-							<string>([^\s\r\n \(\[]+)</string>
-							<key>name</key>
-							<string>junk</string>
+							<string>#shadow_all</string>
 						</dict>
 					</array>
 				</dict>
@@ -885,46 +857,6 @@
 				<dict>
 					<key>include</key>
 					<string>#word</string>
-				</dict>
-			</array>
-		</dict>
-		<key>vec</key>
-		<dict>
-			<key>begin</key>
-			<string>(\[)</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>entity.sequence.start</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>(\])</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>entity.sequence.end</string>
-				</dict>
-			</dict>
-			<key>name</key>
-			<string>meta.sexpr.vec.clojure</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#all</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#newline</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#indentation</string>
 				</dict>
 			</array>
 		</dict>

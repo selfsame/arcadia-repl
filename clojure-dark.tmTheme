@@ -45,124 +45,131 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>name</key>
+			<key>scope</key>
 			<string>sexpr</string>
-			<key>scope</key>
-			<string>meta.sexpr entity.sequence</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#AF4723</string>
+				<string>#FF5400</string>
 			</dict>
 		</dict>
 		<dict>
-			<key>name</key>
-			<string>sexpr2</string>
 			<key>scope</key>
-			<string>meta.sexpr meta.sexpr entity.sequence</string>
+			<string>sexpr sexpr</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#12A2EC</string>
+				<string>#0078FF</string>
 			</dict>
 		</dict>
 		<dict>
-			<key>name</key>
-			<string>sexpr3</string>
 			<key>scope</key>
-			<string>meta.sexpr meta.sexpr meta.sexpr entity.sequence</string>
+			<string>sexpr sexpr sexpr</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#F5A61C</string>
+				<string>#940000</string>
 			</dict>
 		</dict>
 		<dict>
-			<key>name</key>
-			<string>sexpr4</string>
 			<key>scope</key>
-			<string>meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence</string>
+			<string>sexpr sexpr sexpr sexpr</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#30A308</string>
+				<string>#516AFF</string>
 			</dict>
 		</dict>
 		<dict>
-			<key>name</key>
-			<string>sexpr5</string>
 			<key>scope</key>
-			<string>meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence</string>
+			<string>sexpr sexpr sexpr sexpr sexpr</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#733ADE</string>
+				<string>#079F0E</string>
 			</dict>
 		</dict>
 		<dict>
-			<key>name</key>
-			<string>sexpr6</string>
 			<key>scope</key>
-			<string>meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence</string>
+			<string>sexpr sexpr sexpr sexpr sexpr sexpr</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#6AAA2C</string>
+				<string>#F0FF00</string>
 			</dict>
 		</dict>
 		<dict>
-			<key>name</key>
-			<string>sexpr7</string>
 			<key>scope</key>
-			<string>meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence</string>
+			<string>sexpr sexpr sexpr sexpr sexpr sexpr sexpr</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#A52F01</string>
+				<string>#6600FF</string>
 			</dict>
 		</dict>
 		<dict>
-			<key>name</key>
-			<string>sexpr8</string>
 			<key>scope</key>
-			<string>meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence</string>
+			<string>sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#5660E9</string>
+				<string>#92DE26</string>
 			</dict>
 		</dict>
 		<dict>
-			<key>name</key>
-			<string>sexpr9</string>
 			<key>scope</key>
-			<string>meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence</string>
+			<string>sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#D5812E</string>
+				<string>#99553D</string>
 			</dict>
 		</dict>
 		<dict>
-			<key>name</key>
-			<string>sexpr10</string>
 			<key>scope</key>
-			<string>meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr meta.sexpr entity.sequence</string>
+			<string>sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#909090</string>
+				<string>#593FAC</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#007C37</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#6E5500</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#868686</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>name</key>
 			<string>word</string>
 			<key>scope</key>
-			<string>word</string>
+			<string>word, qualified</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#744F38</string>
+				<string>#927462</string>
 			</dict>
 		</dict>
 		<dict>
@@ -202,7 +209,7 @@
 			<key>name</key>
 			<string>keyword</string>
 			<key>scope</key>
-			<string>meta.keyword, meta.keyword qualified namespace, meta.keyword qualified word</string>
+			<string>meta.keyword, meta.keyword qualified namespace, meta.keyword word, meta.keyword qualified</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
@@ -211,9 +218,9 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>keyword</string>
+			<string>keyword_qualified</string>
 			<key>scope</key>
-			<string>meta.keyword.qualified, meta.keyword.qualified qualified namespace, meta.keyword.qualified word</string>
+			<string>meta.keyword.qualified, meta.keyword.qualified qualified namespace, meta.keyword.qualified word, meta.keyword.qualified word</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
@@ -241,7 +248,7 @@
 			<key>settings</key>
 			<dict>
 				<key>background</key>
-				<string>#072705</string>
+				<string>#1F0307</string>
 				<key>fontStyle</key>
 				<string>bold</string>
 				<key>foreground</key>
@@ -267,22 +274,26 @@
 			<key>name</key>
 			<string>special.quote</string>
 			<key>scope</key>
-			<string>meta.special.quote, meta.special.quote meta.sexpr entity.sequence</string>
+			<string>meta.special.quote, meta.special.quote sexpr</string>
 			<key>settings</key>
 			<dict>
 				<key>background</key>
-				<string>#171F12</string>
+				<string>#0D1436</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>name</key>
 			<string>special.deref</string>
 			<key>scope</key>
-			<string>meta.special.deref, meta.special.deref meta.sexpr entity.sequence, meta.special.quote meta.special.deref, meta.special.quote meta.special.deref meta.sexpr entity.sequence</string>
+			<string>meta.special.deref, meta.special.deref sexpr</string>
 			<key>settings</key>
 			<dict>
+				<key>background</key>
+				<string>#0C2602</string>
+				<key>fontStyle</key>
+				<string>bold</string>
 				<key>foreground</key>
-				<string>#3CFF00</string>
+				<string>#FFEA00</string>
 			</dict>
 		</dict>
 		<dict>
@@ -302,7 +313,7 @@
 			<key>name</key>
 			<string>special.backtick</string>
 			<key>scope</key>
-			<string>meta.special.backtick, meta.special.backtick meta.sexpr entity.sequence</string>
+			<string>meta.special.backtick, meta.special.backtick sexpr</string>
 			<key>settings</key>
 			<dict>
 				<key>background</key>
@@ -315,20 +326,20 @@
 			<key>name</key>
 			<string>special.unquote</string>
 			<key>scope</key>
-			<string>meta.special.unquote, meta.special.unquote meta.sexpr entity.sequence</string>
+			<string>meta.special.unquote, meta.special.unquote sexpr</string>
 			<key>settings</key>
 			<dict>
 				<key>background</key>
 				<string>#151212</string>
 				<key>foreground</key>
-				<string>#B9B9B9</string>
+				<string>#3DFF00</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>name</key>
 			<string>special.ignore</string>
 			<key>scope</key>
-			<string>meta.special.ignore, meta.special.ignore meta.sexpr entity.sequence, meta.special.ignore symbol.clojure.core</string>
+			<string>meta.special.ignore</string>
 			<key>settings</key>
 			<dict>
 				<key>background</key>
@@ -471,8 +482,10 @@
 			<string>comment.TODO</string>
 			<key>settings</key>
 			<dict>
+				<key>background</key>
+				<string>#000000</string>
 				<key>foreground</key>
-				<string>#E3505E</string>
+				<string>#C326C1</string>
 			</dict>
 		</dict>
 		<dict>
@@ -490,7 +503,7 @@
 			<key>name</key>
 			<string>repl_prompt</string>
 			<key>scope</key>
-			<string>meta.symbol.repl_prompt</string>
+			<string>meta.repl_prompt</string>
 			<key>settings</key>
 			<dict>
 				<key>background</key>
