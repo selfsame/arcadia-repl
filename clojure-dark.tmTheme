@@ -63,7 +63,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#14A5BF</string>
+				<string>#12A2EC</string>
 			</dict>
 		</dict>
 		<dict>
@@ -74,7 +74,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#6237B2</string>
+				<string>#F5A61C</string>
 			</dict>
 		</dict>
 		<dict>
@@ -85,7 +85,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#397B27</string>
+				<string>#30A308</string>
 			</dict>
 		</dict>
 		<dict>
@@ -96,7 +96,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#8DA0A3</string>
+				<string>#733ADE</string>
 			</dict>
 		</dict>
 		<dict>
@@ -107,7 +107,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#873472</string>
+				<string>#6AAA2C</string>
 			</dict>
 		</dict>
 		<dict>
@@ -118,7 +118,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#5460D5</string>
+				<string>#A52F01</string>
 			</dict>
 		</dict>
 		<dict>
@@ -129,7 +129,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#6E9548</string>
+				<string>#5660E9</string>
 			</dict>
 		</dict>
 		<dict>
@@ -140,7 +140,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#AE7843</string>
+				<string>#D5812E</string>
 			</dict>
 		</dict>
 		<dict>
@@ -155,106 +155,54 @@
 			</dict>
 		</dict>
 		<dict>
+			<key>name</key>
+			<string>word</string>
 			<key>scope</key>
-			<string>meta.vec entity.sequence</string>
+			<string>word</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#3383E7</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>scope</key>
-			<string>meta.vec meta.vec entity.sequence</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#C8BF2C</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>scope</key>
-			<string>meta.vec meta.vec meta.vec entity.sequence</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#649646</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>scope</key>
-			<string>meta.vec meta.vec meta.vec meta.vec entity.sequence</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#833D22</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>scope</key>
-			<string>meta.vec meta.vec meta.vec meta.vec meta.vec entity.sequence</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#589296</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>scope</key>
-			<string>meta.vec meta.vec meta.vec meta.vec meta.vec meta.vec entity.sequence</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#9264B2</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>scope</key>
-			<string>meta.vec meta.vec meta.vec meta.vec meta.vec meta.vec meta.vec entity.sequence</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#7D7E7C</string>
+				<string>#744F38</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>symbol</string>
+			<string>dymaic</string>
 			<key>scope</key>
-			<string>meta.sexpr symbol</string>
+			<string>word.dynamic</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#CE8065</string>
+				<string>#FFFFFF</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>symbol2</string>
+			<string>clojure.core</string>
 			<key>scope</key>
-			<string>meta.sexpr meta.sexpr symbol</string>
+			<string>storage.clojure.core</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#867C76</string>
+				<string>#FF863D</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>symbol.qualified</string>
+			<string>namespace</string>
 			<key>scope</key>
-			<string>symbol.qualified, meta.sexpr symbol.qualified</string>
+			<string>qualified namespace</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#30FF00</string>
+				<string>#357333</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>name</key>
 			<string>keyword</string>
 			<key>scope</key>
-			<string>meta.keyword, meta.keyword symbol, meta.keyword symbol.qualified</string>
+			<string>meta.keyword, meta.keyword qualified namespace, meta.keyword qualified word</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
@@ -265,88 +213,11 @@
 			<key>name</key>
 			<string>keyword</string>
 			<key>scope</key>
-			<string>meta.keyword.qualified, meta.keyword.qualified symbol</string>
+			<string>meta.keyword.qualified, meta.keyword.qualified qualified namespace, meta.keyword.qualified word</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
 				<string>#C01AFE</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>integer</string>
-			<key>scope</key>
-			<string>integer</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#FFDE00</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>ratio</string>
-			<key>scope</key>
-			<string>ratio</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#00FF96</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>float</string>
-			<key>scope</key>
-			<string>float</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#FF5A00</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>deref</string>
-			<key>scope</key>
-			<string>meta.deref</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#3CFF00</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>special</string>
-			<key>scope</key>
-			<string>meta.special</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#3CFF00</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>special_form</string>
-			<key>scope</key>
-			<string>meta.special_form, meta.special_form meta.sexpr entity.sequence</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#E65DFF</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>special_form</string>
-			<key>scope</key>
-			<string>meta.special_form meta.special_form, meta.special_form meta.special_form meta.sexpr entity.sequence</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#0DFE01</string>
 			</dict>
 		</dict>
 		<dict>
@@ -394,28 +265,225 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>meta.lambda.argument</string>
+			<string>special.quote</string>
 			<key>scope</key>
-			<string>meta.lambda.argument</string>
+			<string>meta.special.quote, meta.special.quote meta.sexpr entity.sequence</string>
+			<key>settings</key>
+			<dict>
+				<key>background</key>
+				<string>#171F12</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>special.deref</string>
+			<key>scope</key>
+			<string>meta.special.deref, meta.special.deref meta.sexpr entity.sequence, meta.special.quote meta.special.deref, meta.special.quote meta.special.deref meta.sexpr entity.sequence</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#3CFF00</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>special.lambda</string>
+			<key>scope</key>
+			<string>meta.special.lambda</string>
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
 				<string>italic</string>
 				<key>foreground</key>
-				<string>#00E4FF</string>
+				<string>#00D8FF</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>special.backtick</string>
+			<key>scope</key>
+			<string>meta.special.backtick, meta.special.backtick meta.sexpr entity.sequence</string>
+			<key>settings</key>
+			<dict>
+				<key>background</key>
+				<string>#2C0713</string>
+				<key>foreground</key>
+				<string>#FF0000</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>special.unquote</string>
+			<key>scope</key>
+			<string>meta.special.unquote, meta.special.unquote meta.sexpr entity.sequence</string>
+			<key>settings</key>
+			<dict>
+				<key>background</key>
+				<string>#151212</string>
+				<key>foreground</key>
+				<string>#B9B9B9</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>special.ignore</string>
+			<key>scope</key>
+			<string>meta.special.ignore, meta.special.ignore meta.sexpr entity.sequence, meta.special.ignore symbol.clojure.core</string>
+			<key>settings</key>
+			<dict>
+				<key>background</key>
+				<string>#0F1214</string>
+				<key>foreground</key>
+				<string>#343F51</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>special.ignore.form</string>
+			<key>scope</key>
+			<string>meta.special.ignore.form</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#568299</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>special.instance</string>
+			<key>scope</key>
+			<string>meta.special.instance</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#304CF5</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>number.base</string>
+			<key>scope</key>
+			<string>number.base</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#C92776</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>number.hexadecimal</string>
+			<key>scope</key>
+			<string>number.hexadecimal</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#00C237</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>integer</string>
+			<key>scope</key>
+			<string>number.integer</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#FFDE00</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>float</string>
+			<key>scope</key>
+			<string>number.float</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#FF8400</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>meta.constant</string>
+			<key>scope</key>
+			<string>meta.constant</string>
+			<key>settings</key>
+			<dict>
+				<key>fontStyle</key>
+				<string>bold</string>
+				<key>foreground</key>
+				<string>#07A765</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>name</key>
 			<string>illegal</string>
 			<key>scope</key>
-			<string>invalid</string>
+			<string>invalid, meta.special.lambda meta.special.lambda, source meta.lambda.argument</string>
+			<key>settings</key>
+			<dict>
+				<key>fontStyle</key>
+				<string>bold</string>
+				<key>foreground</key>
+				<string>#FF0000</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>meta.lambda.argument</string>
+			<key>scope</key>
+			<string>meta.special.lambda meta.lambda.argument</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#00E4FF</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>newline</string>
+			<key>scope</key>
+			<string>meta.newline, meta.indent</string>
 			<key>settings</key>
 			<dict>
 				<key>background</key>
-				<string>#FF0000</string>
+				<string>#0F1214</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>comment</string>
+			<key>scope</key>
+			<string>comment</string>
+			<key>settings</key>
+			<dict>
+				<key>background</key>
+				<string>#0F1214</string>
 				<key>foreground</key>
-				<string>#000000</string>
+				<string>#343F51</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>comment.TODO</string>
+			<key>scope</key>
+			<string>comment.TODO</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#E3505E</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>comment.TODO.text</string>
+			<key>scope</key>
+			<string>comment.TODO.text</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#949494</string>
 			</dict>
 		</dict>
 		<dict>
@@ -431,17 +499,6 @@
 				<string>bold italic</string>
 				<key>foreground</key>
 				<string>#FFC500</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>comment</string>
-			<key>scope</key>
-			<string>comment</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#545454</string>
 			</dict>
 		</dict>
 	</array>

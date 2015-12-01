@@ -1,4 +1,12 @@
-(ns learnnext.core
+#_     (asdf)
+
+(farts)foo 
+(thing) foo
+
+ 
+
+#_ 
+  (ns learnnext.core
 	(:require
 		[om.next :as om :refer-macros [defui]]
 		[om.next.protocols :as p]
@@ -7,19 +15,30 @@
 		[heh.core :as heh :refer-macros [html]]
 		[dollar.bill :as $ :refer [$]]
 		[learnnext.data :as data])
-	(:use [cljs.pprint :only [pprint]]))
- 
-(enable-console-print!)
+
+	(:use [cljs.pprint :only [pprint]])) (foo) sdf 
+
+lsdfk.cheese/*foo*
+    cat
+foo
+foo.core/*baz*
+
+*foo*
+*
+@(enable-console-print!)
  thing.core/asdlfkj
 ($/append ($ "head") 
 	($ "<style>#chart{font-size:.7em; font-family:courier;} 
 			.column{display:inline-block; width:150px; border-right:1px solid black; padding:.2em .5em; border-bottom:1px dotted silver;}</style>"))
+@sdgf '(@( 'foo))
+dfg
+'(ts.core/foo (:sldjf 37 ) )
+@( '( @(+ 1 '(* 3 1) ) ))
 
-(ts.core/foo)
 
-@sldf
+
 (ns rainbow.sexpress)
-
+(((((())))))
 (quote [
 ( ( ( ( ))))
 [[(((([[[]]]))))[[[] []]]]]
@@ -28,7 +47,7 @@
 
 '([(((([[][{[(())] ({([])[]})}] ]))))] )
 
-'(( ( ( ( ( ( ( ( ) ) ) ) ) ) ) ) ) () ()
+'(( ( ( ( ( ( ( @(+ 1 1) ) ) ) ) ) ) ) ) () ()
 
 '([([([([([([([([([( )])])])])])])])])])
 
@@ -36,13 +55,7 @@
 '[() (())  [ (([([()])]))]]
 '(((( [[ [[ (( [ ( [ ()])]))]]]]))))[ [[[] ]]]
 
-;asdfjhasdf
-@(joe) 
-foo.core
-@(foo@@@(@@fo@@o)) )
-`[sdfj sdf ]
-@joe 
-
+fo.bazo/core
 
 (def app-state (atom {
 	:app/title "Main Sequence Stars"
@@ -62,10 +75,10 @@ foo.core
 	(if-let [local (get (:state data) k) ]
     {:value local}
     {:value :not-found})))
-
+*fart* 
 @atom 
 (defpdf read)
-
+*fart*
 (pdf read [data k]
   (get @(:state data) k :not-found ) )
 
@@ -82,12 +95,10 @@ foo.core
 	{k #{:app/title}}
 	{:value (reverse (get @(:state data) k))})
 
-`(thing blah)
+
 (defn mutate [_ _ _] {})
 
-(thing/foo.core) 
 
-([[(([[ {} ]]))]])
 (defui Star
   static om/IQuery
   (query [this] '[:class :color/rgb :color/hex])
@@ -103,23 +114,93 @@ foo.core
 					(<span.class.column 
 						(style {:background (:color/hex props)})
 						(:color/hex props)) )))))
+[[[[[[[]]]]]]]
+;TODO
+; [x] #_ ignore pair
+; [ ] fix newlines breaking basic forms
+; [x] hashmap capture
+;     [ ] sexpr pairs
+; [x] special form scoping
+; [x] illegalize nested lambdas, naked lambda args
+; [x] scope for clojure.core fns
 
-(def star (om/factory Star))
-(:sdfklj/foo)
-awef$sdjf
-%1
-(def rgb? #(re-find #"rgb$" (str %)))
-::thing
-::foo.bar/quaz
-@( foo )
-(map 
-  #(* % %) 
-  (::thing ) {:foo.core/thing 
-            [1 2/7 3 4.6]})
+; [ ] gensym foo#
+
+
+
+#_ rainbows
+(((((((((((( ))))))))))))
+[({[({[({[({})]})]})]})]
+
+#_ symbols
+methods userland foo.core/qualified
+
+#_ literals
+12 2.9 3/6 0xBADA55 9r8012 07123 -1.2e-5 4.2M 18N 
+:keyword ::qualified :foo.core/resolved
+"Jane's sign said \"welcome\""
+
+#_ specials
+@ (atomic) @foo
+'(#(re-find #"rgb$\(" (str %3)))
+
+'(reader [quoted (form)])
+
+#_ macro-specials
+(defmacro fun [sym args & code] 
+  `(do   
+      (prn ~sym)
+      (comment (def ~'foo 7))
+      (def ~sym [~'a b] 
+        ~@code)))
+{:a b}
+;TODO illegalize
+[foo/ /baz  %1 ::foo.bar/quaz .67 #(#()) n.s]
+;TODO legalize
+[:./d :. :./. {1 2 3}]
+:foo/cat
+;TODO scope
+[*print-length* #'foo foo#
+ #?(:cljs reader-conditional) ^{:meta 'form}]
+
+(foocore/baz.sad)
+foo.core/baz.sad
+
+#<GameObject New Game Object (UnityEngine.GameObject)>
+
+
+#
+
+(defn baz [a b c]
+  (map 
+    (comp ;ridic
+      #(re-find #"rgb$\(" (str %))
+      #(* % %)) 
+    (get {:foo.core/thing [1 2/7 3 4.6]}
+      ::thing)))
+
+
+
+
+
+
+
+
+fii
+
+[dfjk]
+
+
+
+
+
 
 clojure.string/lowercase
 
-(comment 
+(comment) 
+#_  asdf adf 
+
+gii
 (defui Widget
 	static om/IQueryParams
   (params [this]
@@ -128,7 +209,7 @@ clojure.string/lowercase
   (query [this] '[:app/title (:stars {:start ?start :end ?end})])
 	Object
 	(render [this]
-		(let [props (om/props this)
+		(comment )(let [props (om/props this)
 				  stars (:stars props)]
 			(html
 				(<h1#title (:app/title props) ) (<hr)
@@ -145,7 +226,9 @@ clojure.string/lowercase
           (om/params this))
 				(<div#chart
 					(map #(<span.column %) (clj->js (keys (last (last stars)))))
-					(map #(star (assoc (last %) :om-index (gensym))) stars)))))))
+					(map #(star (assoc (last %) :om-index (gensym))) stars)))))) 
+  
+ 
  
 
 (def reconciler (om/reconciler {:state app-state :parser (om/parser {:read read :mutate mutate})}))

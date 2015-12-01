@@ -1,0 +1,57 @@
+# [PackageDev] target_format: plist, ext: tmTheme
+name: lisp-dark
+uuid: -2095953460-558446636-1373169771
+author: selfsame
+colorSpaceName: sRGB
+gutterSettings:
+  background: '#101315'
+  divider: '#05386C'
+  foreground: '#5F7387'
+  selectionBackground: '#4f5b66'
+  selectionForeground: '#a7adba'
+semanticClass: clojure.dark
+settings:
+- settings:
+    background: '#000000'
+    caret: '#A9BACB'
+    foreground: '#A9BACB'
+    invisibles: '#0F335A'
+    lineHighlight: '#240F21'
+    selection: '#61295A'
+    selectionForeground: '#95F7D1'
+
+
+- scope: 'sexpr'
+  settings: {foreground: '#FF5400' }
+
+- scope: 'sexpr sexpr'
+  settings: { foreground: '#0078FF' }
+
+- scope: 'sexpr sexpr sexpr'
+  settings: { foreground: '#940000' }
+
+- scope: 'sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#516AFF' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#079F0E' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#F0FF00' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#6600FF' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#FEFEFE' }
+
+- scope: 'word'
+  settings: {foreground: '#528E59' }
+
+- scope: 'ignore, ignore sexpr, ignore word'
+  settings:
+    foreground: '#2B2B2B' 
+    background: '#04150B'
+
+- scope: 'shadow_word'
+  settings: {background: '#1F0703' }

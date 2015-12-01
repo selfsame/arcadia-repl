@@ -20,6 +20,46 @@
 	</array>
 	<key>repository</key>
 	<dict>
+		<key>BigDecimal</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>number.float</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>number.base</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(\-?[0-9]+\.[0-9]+|0|\-?[1-9][0-9]*)(M)</string>
+			<key>name</key>
+			<string>number.BigDecimal</string>
+		</dict>
+		<key>BigInteger</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>number.integer</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>number.base</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(0|\-?[1-9][0-9]*)(N)</string>
+			<key>name</key>
+			<string>number.BigInteger</string>
+		</dict>
 		<key>all</key>
 		<dict>
 			<key>patterns</key>
@@ -30,110 +70,22 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#expr</string>
-				</dict>
-			</array>
-		</dict>
-		<key>anything</key>
-		<dict>
-			<key>name</key>
-			<string>anything</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>match</key>
-					<string>([^\(\)\[\]]*)</string>
-					<key>name</key>
-					<string>nonbracket</string>
+					<string>#atom</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#comment_list</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#comment_vector</string>
+					<string>#sexpr</string>
 				</dict>
 			</array>
 		</dict>
 		<key>argument_literal</key>
 		<dict>
 			<key>match</key>
-			<string>(%(&amp;|([1-9][0-9]*)))</string>
+			<string>(%(&amp;|([1-9][0-9]*))?)</string>
 			<key>name</key>
 			<string>meta.lambda.argument</string>
 		</dict>
-		<key>comment</key>
-		<dict>
-			<key>name</key>
-			<string>comment.line.clojure</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>match</key>
-					<string>;.*$\n?</string>
-					<key>name</key>
-					<string>comment.line.clojure</string>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>\(comment</string>
-					<key>contentName</key>
-					<string>comment.form.clojure</string>
-					<key>end</key>
-					<string>\)</string>
-					<key>name</key>
-					<string>comment.macro.clojure</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#anything</string>
-						</dict>
-					</array>
-				</dict>
-			</array>
-		</dict>
-		<key>comment_list</key>
-		<dict>
-			<key>begin</key>
-			<string>(\()</string>
-			<key>end</key>
-			<string>(\))</string>
-			<key>name</key>
-			<string>comment_list</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#anything</string>
-				</dict>
-			</array>
-		</dict>
-		<key>comment_vector</key>
-		<dict>
-			<key>begin</key>
-			<string>(\[)</string>
-			<key>end</key>
-			<string>(\])</string>
-			<key>name</key>
-			<string>comment_vector</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#anything</string>
-				</dict>
-			</array>
-		</dict>
-		<key>deref</key>
-		<dict>
-			<key>match</key>
-			<string>([\@])</string>
-			<key>name</key>
-			<string>meta.deref.clojure</string>
-		</dict>
-		<key>expr</key>
+		<key>atom</key>
 		<dict>
 			<key>patterns</key>
 			<array>
@@ -155,10 +107,6 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#sexpr</string>
-				</dict>
-				<dict>
-					<key>include</key>
 					<string>#special_form</string>
 				</dict>
 				<dict>
@@ -171,11 +119,15 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#qualified_symbol</string>
+					<string>#keyword</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#keyword</string>
+					<string>#constant</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#core_var</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -183,19 +135,245 @@
 				</dict>
 			</array>
 		</dict>
+		<key>baseN</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>number.integer</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>number.base</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>number.integer</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>([2-9]|[1-2][0-9]|3[0-7])(r)([0-9a-zA-Z]+)</string>
+			<key>name</key>
+			<string>number.baseN</string>
+		</dict>
+		<key>comment</key>
+		<dict>
+			<key>name</key>
+			<string>comment.line.clojure</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>;</string>
+					<key>end</key>
+					<string>$\n?</string>
+					<key>name</key>
+					<string>comment.line.clojure</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>captures</key>
+							<dict>
+								<key>2</key>
+								<dict>
+									<key>name</key>
+									<string>comment.TODO.text</string>
+								</dict>
+							</dict>
+							<key>match</key>
+							<string>(TODO)(.*)</string>
+							<key>name</key>
+							<string>comment.TODO</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>.*</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\(comment</string>
+					<key>contentName</key>
+					<string>comment.form.clojure</string>
+					<key>end</key>
+					<string>\)</string>
+					<key>name</key>
+					<string>comment.macro.clojure</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#comment_anything</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>comment_anything</key>
+		<dict>
+			<key>name</key>
+			<string>comment_anything</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>([^\(\)\[\]]*)</string>
+					<key>name</key>
+					<string>nonbracket</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comment_list</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comment_vector</string>
+				</dict>
+			</array>
+		</dict>
+		<key>comment_list</key>
+		<dict>
+			<key>begin</key>
+			<string>(\()</string>
+			<key>end</key>
+			<string>(\))</string>
+			<key>name</key>
+			<string>comment_list</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#comment_anything</string>
+				</dict>
+			</array>
+		</dict>
+		<key>comment_vector</key>
+		<dict>
+			<key>begin</key>
+			<string>(\[)</string>
+			<key>end</key>
+			<string>(\])</string>
+			<key>name</key>
+			<string>comment_vector</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#comment_anything</string>
+				</dict>
+			</array>
+		</dict>
+		<key>constant</key>
+		<dict>
+			<key>match</key>
+			<string>(true|false|nil)</string>
+			<key>name</key>
+			<string>meta.constant.clojure</string>
+		</dict>
+		<key>core_var</key>
+		<dict>
+			<key>match</key>
+			<string>(\*agent\*|\*clojure-version\*|\*command-line-args\*|\*compile-files\*|\*compile-path\*|\*compiler-options\*|\*data-readers\*|\*default-data-reader-fn\*|\*e|\*err\*|\*file\*|\*flush-on-newline\*|\*in\*|\*ns\*|\*out\*|\*print-dup\*|\*print-length\*|\*print-level\*|\*print-meta\*|\*print-readably\*|\*read-eval\*|\*unchecked-math\*|\*warn-on-reflection\*|\+|-|-&gt;|-&gt;&gt;|-&gt;ArrayChunk|-&gt;Eduction|-&gt;Vec|-&gt;VecNode|-&gt;VecSeq|&lt;|&lt;=|=|==|&gt;|&gt;=|Throwable-&gt;map|accessor|aclone|add-classpath|add-watch|agent|agent-error|agent-errors|aget|alength|alias|all-ns|alter|alter-meta!|alter-var-root|amap|ancestors|and|apply|areduce|array-map|as-&gt;|aset|aset-boolean|aset-byte|aset-char|aset-double|aset-float|aset-int|aset-long|aset-short|assert|assoc|assoc!|assoc-in|associative?|atom|await|await-for|bases|bean|bigdec|bigint|biginteger|binding|bit-and|bit-and-not|bit-clear|bit-flip|bit-not|bit-or|bit-set|bit-shift-left|bit-shift-right|bit-test|bit-xor|boolean|boolean-array|booleans|bound-fn|bound-fn\*|bound?|butlast|byte|byte-array|bytes|case|cast|cat|catch|char|char-array|char-escape-string|char-name-string|char?|chars|class|class?|clear-agent-errors|clojure-version|coll?|comment|commute|comp|comparator|compare|compare-and-set!|compile|complement|completing|concat|cond|cond-&gt;|cond-&gt;&gt;|condp|conj|conj!|cons|constantly|construct-proxy|contains?|count|counted?|create-ns|create-struct|cycle|dec|decimal?|declare|dedupe|def|default-data-readers|definline|definterface|defmacro|defmethod|defmulti|defn|defn-|defonce|defprotocol|defrecord|defstruct|deftype|delay|delay?|deliver|denominator|deref|derive|descendants|disj|disj!|dissoc|dissoc!|distinct|distinct?|do|doall|dorun|doseq|dosync|dotimes|doto|double|double-array|doubles|drop|drop-last|drop-while|eduction|empty|empty?|ensure|ensure-reduced|enumeration-seq|error-handler|error-mode|eval|even?|every-pred|every?|ex-data|ex-info|extend|extend-protocol|extend-type|extenders|extends?|false?|ffirst|file-seq|filter|filterv|finally|find|find-keyword|find-ns|find-var|first|flatten|float|float-array|float?|floats|flush|fn|fn?|fnext|fnil|for|force|format|frequencies|future|future-call|future-cancel|future-cancelled?|future-done?|future?|gen-class|gen-interface|gensym|get|get-in|get-method|get-proxy-class|get-thread-bindings|get-validator|group-by|hash|hash-map|hash-ordered-coll|hash-set|hash-unordered-coll|identical?|identity|if|if-let|if-not|if-some|ifn?|import|in-ns|inc|init-proxy|instance?|int|int-array|integer?|interleave|intern|interpose|into|into-array|ints|io!|isa?|iterate|iterator-seq|juxt|keep|keep-indexed|key|keys|keyword|keyword?|last|lazy-cat|lazy-seq|let|letfn|line-seq|list|list\*|list?|load|load-file|load-reader|load-string|loaded-libs|locking|long|long-array|longs|loop|macroexpand|macroexpand-1|make-array|make-hierarchy|map|map-indexed|map?|mapcat|mapv|max|max-key|memfn|memoize|merge|merge-with|meta|methods|min|min-key|mix-collection-hash|mod|monitor-enter|monitor-exit|name|namespace|namespace-munge|neg?|new|newline|next|nfirst|nil?|nnext|not|not-any?|not-empty|not-every?|not=|ns|ns-aliases|ns-imports|ns-interns|ns-map|ns-name|ns-publics|ns-refers|ns-resolve|ns-unalias|ns-unmap|nth|nthnext|nthrest|num|number?|numerator|object-array|odd?|or|parents|partial|partition|partition-all|partition-by|pcalls|peek|persistent!|pmap|pop|pop!|pop-thread-bindings|pos?|pr|pr-str|prefer-method|prefers|print|print-str|printf|println|println-str|prn|prn-str|promise|proxy|proxy-mappings|proxy-super|push-thread-bindings|pvalues|quot|quote|rand|rand-int|rand-nth|random-sample|range|ratio?|rational?|rationalize|re-find|re-groups|re-matcher|re-matches|re-pattern|re-seq|read|read-line|read-string|reader-conditional|reader-conditional?|realized?|record?|recur|reduce|reduce-kv|reduced|reduced?|reductions|ref|ref-history-count|ref-max-history|ref-min-history|ref-set|refer|refer-clojure|reify|release-pending-sends|rem|remove|remove-all-methods|remove-method|remove-ns|remove-watch|repeat|repeatedly|replace|replicate|require|reset!|reset-meta!|resolve|rest|restart-agent|resultset-seq|reverse|reversible?|rseq|rsubseq|run!|satisfies?|second|select-keys|send|send-off|send-via|seq|seq?|seque|sequence|sequential?|set|set!|set-agent-send-executor!|set-agent-send-off-executor!|set-error-handler!|set-error-mode!|set-validator!|set?|short|short-array|shorts|shuffle|shutdown-agents|slurp|some|some-&gt;|some-&gt;&gt;|some-fn|some?|sort|sort-by|sorted-map|sorted-map-by|sorted-set|sorted-set-by|sorted?|special-symbol?|spit|split-at|split-with|str|string?|struct|struct-map|subs|subseq|subvec|supers|swap!|symbol|symbol?|sync|tagged-literal|tagged-literal?|take|take-last|take-nth|take-while|test|the-ns|thread-bound?|throw|time|to-array|to-array-2d|trampoline|transduce|transient|tree-seq|true?|try|type|unchecked-add|unchecked-add-int|unchecked-byte|unchecked-char|unchecked-dec|unchecked-dec-int|unchecked-divide-int|unchecked-double|unchecked-float|unchecked-inc|unchecked-inc-int|unchecked-int|unchecked-long|unchecked-multiply|unchecked-multiply-int|unchecked-negate|unchecked-negate-int|unchecked-remainder-int|unchecked-short|unchecked-subtract|unchecked-subtract-int|underive|unreduced|unsigned-bit-shift-right|update|update-in|update-proxy|use|val|vals|var|var-get|var-set|var?|vary-meta|vec|vector|vector-of|vector?|volatile!|volatile?|vreset!|vswap!|when|when-first|when-let|when-not|when-some|while|with-bindings|with-bindings\*|with-in-str|with-local-vars|with-meta|with-open|with-out-str|with-precision|with-redefs|with-redefs-fn|xml-seq|zero?|zipmap|-&gt;Cat|append!|cat|drop|filter|flatten|fold|foldcat|folder|map|mapcat|monoid|reduce|reducer|remove|take|take-while)(?=[\(\)\[\]{};#%\^~`'":@\s\/\\\.])</string>
+			<key>name</key>
+			<string>storage.clojure.core</string>
+		</dict>
+		<key>dynamic_word</key>
+		<dict>
+			<key>match</key>
+			<string>([\*])((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\\. \*])(\g&lt;c&gt;|[0-9#%'\.])*)([\*])</string>
+			<key>name</key>
+			<string>word.dynamic</string>
+		</dict>
 		<key>float</key>
 		<dict>
 			<key>match</key>
 			<string>(\-?[0-9]+\.[0-9]+)</string>
 			<key>name</key>
-			<string>float</string>
+			<string>number.float</string>
+		</dict>
+		<key>hashmap</key>
+		<dict>
+			<key>begin</key>
+			<string>(\{)</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>entity.sequence.start</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(\})</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>entity.sequence.end</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.sexpr.hashmap.clojure</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#all</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#newline</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#indentation</string>
+				</dict>
+			</array>
+		</dict>
+		<key>hexadecimal</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>number.integer</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>number.base</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>number.hexadecimal</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(0)(x)([0-9abcdefABCDEF]+)</string>
+			<key>name</key>
+			<string>number.hexadecimal</string>
+		</dict>
+		<key>indentation</key>
+		<dict>
+			<key>match</key>
+			<string>^([\s]*)</string>
+			<key>name</key>
+			<string>meta.indent</string>
 		</dict>
 		<key>integer</key>
 		<dict>
 			<key>match</key>
 			<string>(0|\-?[1-9][0-9]*)</string>
 			<key>name</key>
-			<string>integer</string>
+			<string>number.integer</string>
 		</dict>
 		<key>keyword</key>
 		<dict>
@@ -216,7 +394,7 @@
 		<key>list</key>
 		<dict>
 			<key>begin</key>
-			<string>(\()(?!\))</string>
+			<string>(\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>0</key>
@@ -226,7 +404,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>(?&lt;!\()(\))</string>
+			<string>(\))</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>0</key>
@@ -243,15 +421,32 @@
 					<key>include</key>
 					<string>#all</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#newline</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#indentation</string>
+				</dict>
 			</array>
+		</dict>
+		<key>newline</key>
+		<dict>
+			<key>match</key>
+			<string>([\n\r])</string>
+			<key>name</key>
+			<string>meta.newline</string>
 		</dict>
 		<key>number</key>
 		<dict>
+			<key>name</key>
+			<string>number</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#float</string>
+					<string>#scientific</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -259,39 +454,111 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#hexadecimal</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#baseN</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#octal</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#BigDecimal</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#BigInteger</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#float</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#integer</string>
 				</dict>
 			</array>
 		</dict>
+		<key>octal</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>number.base</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>number.integer</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(0)([0-7]+)</string>
+			<key>name</key>
+			<string>number.octal</string>
+		</dict>
 		<key>qualified_keyword</key>
 		<dict>
+			<key>applyEndPatternLast</key>
+			<integer>1</integer>
 			<key>begin</key>
-			<string>(::)</string>
+			<string>::</string>
 			<key>end</key>
-			<string>(?=\W)</string>
+			<string>(?=.)</string>
 			<key>name</key>
 			<string>meta.keyword.qualified.clojure</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#symbol</string>
+					<string>#word</string>
 				</dict>
 			</array>
 		</dict>
 		<key>qualified_symbol</key>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>namespace</string>
+				</dict>
+			</dict>
 			<key>match</key>
-			<string>(?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\])(?&lt;sym&gt;\g&lt;c&gt;|[0-9#%'\.])*\/\g&lt;sym&gt;+</string>
+			<string>((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\])(\g&lt;c&gt;|[0-9#%'])+)([\/])(\g&lt;c&gt;(\g&lt;c&gt;|[0-9#%'])+)</string>
 			<key>name</key>
-			<string>symbol.qualified</string>
+			<string>qualified</string>
 		</dict>
 		<key>ratio</key>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>number.integer</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>number.base</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>number.integer</string>
+				</dict>
+			</dict>
 			<key>match</key>
-			<string>(0|\-?[1-9][0-9]*)\/(0|\-?[1-9][0-9]*)</string>
+			<string>(0|\-?[1-9][0-9]*)(\/)(0|\-?[1-9][0-9]*)</string>
 			<key>name</key>
-			<string>ratio</string>
+			<string>number.ratio</string>
 		</dict>
 		<key>regex</key>
 		<dict>
@@ -319,7 +586,72 @@
 			<key>match</key>
 			<string>([\n]|^)((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\])+►)</string>
 			<key>name</key>
-			<string>meta.symbol.repl_prompt</string>
+			<string>meta.repl_prompt</string>
+		</dict>
+		<key>scientific</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>number.float</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>number.base</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>number.integer</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(\-?[0-9]+\.[0-9]+|0|\-?[1-9][0-9]*)(e)(0|\-?[1-9][0-9]*)</string>
+			<key>name</key>
+			<string>number.scientific</string>
+		</dict>
+		<key>set</key>
+		<dict>
+			<key>begin</key>
+			<string>(\#{)</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>entity.sequence.start</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(\})</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>entity.sequence.end</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.sexpr.set.clojure</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#all</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#newline</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#indentation</string>
+				</dict>
+			</array>
 		</dict>
 		<key>sexpr</key>
 		<dict>
@@ -335,39 +667,152 @@
 					<key>include</key>
 					<string>#vec</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#set</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#hashmap</string>
+				</dict>
 			</array>
-		</dict>
-		<key>special</key>
-		<dict>
-			<key>match</key>
-			<string>([\`\~\'\@])</string>
-			<key>name</key>
-			<string>meta.special.clojure</string>
 		</dict>
 		<key>special_form</key>
 		<dict>
 			<key>name</key>
-			<string>meta.special_form.clojure</string>
+			<string>meta.special</string>
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>match</key>
-					<string>([`~'@](?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\])(\g&lt;c&gt;|[0-9#%'])*)</string>
-					<key>name</key>
-					<string>meta.specialized.clojure</string>
-				</dict>
-				<dict>
+					<key>applyEndPatternLast</key>
+					<integer>1</integer>
 					<key>begin</key>
-					<string>(\()</string>
+					<string>([@][\n\r \s]*)</string>
 					<key>end</key>
-					<string>(\))</string>
+					<string>(?=[\s\)\(\[\]])</string>
 					<key>name</key>
-					<string>meta.specialized.clojure</string>
+					<string>meta.special.deref</string>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>include</key>
 							<string>#all</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>applyEndPatternLast</key>
+					<integer>1</integer>
+					<key>begin</key>
+					<string>(['][\n\r \s]*)</string>
+					<key>end</key>
+					<string>(?=[\s\)\(\[\]])</string>
+					<key>name</key>
+					<string>meta.special.quote</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#all</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>applyEndPatternLast</key>
+					<integer>1</integer>
+					<key>begin</key>
+					<string>([`][\n\r \s]*)</string>
+					<key>end</key>
+					<string>(?=[\s\)\(\[\]])</string>
+					<key>name</key>
+					<string>meta.special.backtick</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#all</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>applyEndPatternLast</key>
+					<integer>1</integer>
+					<key>begin</key>
+					<string>([~][\n\r \s]*)</string>
+					<key>end</key>
+					<string>(?=[\s\)\(\[\]])</string>
+					<key>name</key>
+					<string>meta.special.unquote</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#all</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(#[\n\r \s]*\()</string>
+					<key>end</key>
+					<string>(\))</string>
+					<key>name</key>
+					<string>meta.special.lambda</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#all</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(#\&lt;)</string>
+					<key>end</key>
+					<string>(\&gt;)</string>
+					<key>name</key>
+					<string>meta.special.instance</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>([^\&gt;]+)</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>applyEndPatternLast</key>
+					<integer>1</integer>
+					<key>begin</key>
+					<string>(#_[\n\r \s]*)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>meta.special.ignore.form</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(?=[\s\r\n \(\[])</string>
+					<key>name</key>
+					<string>meta.special.ignore</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#comment_list</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#comment_vector</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>([^\s\r\n \(\[]+)</string>
+							<key>name</key>
+							<string>junk</string>
 						</dict>
 					</array>
 				</dict>
@@ -403,17 +848,32 @@
 		</dict>
 		<key>symbol</key>
 		<dict>
-			<key>match</key>
-			<string>(?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\])(\g&lt;c&gt;|[0-9#%'])*</string>
 			<key>name</key>
 			<string>symbol</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#qualified_symbol</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#dynamic_word</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#word</string>
+				</dict>
+			</array>
 		</dict>
 		<key>unqualified_keyword</key>
 		<dict>
+			<key>applyEndPatternLast</key>
+			<integer>1</integer>
 			<key>begin</key>
-			<string>(:[^:])</string>
+			<string>:(?!:)</string>
 			<key>end</key>
-			<string>()\b</string>
+			<string>(?=.)</string>
 			<key>name</key>
 			<string>meta.keyword.unqualified.clojure</string>
 			<key>patterns</key>
@@ -424,14 +884,14 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#symbol</string>
+					<string>#word</string>
 				</dict>
 			</array>
 		</dict>
 		<key>vec</key>
 		<dict>
 			<key>begin</key>
-			<string>(\[)(?!\])</string>
+			<string>(\[)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>0</key>
@@ -441,7 +901,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>(?&lt;!\[)(\])</string>
+			<string>(\])</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -451,14 +911,29 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.vec.clojure</string>
+			<string>meta.sexpr.vec.clojure</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>include</key>
 					<string>#all</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#newline</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#indentation</string>
+				</dict>
 			</array>
+		</dict>
+		<key>word</key>
+		<dict>
+			<key>match</key>
+			<string>((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\\. ])(\g&lt;c&gt;|[0-9#%'\*\.])*)</string>
+			<key>name</key>
+			<string>word</string>
 		</dict>
 	</dict>
 	<key>scopeName</key>
