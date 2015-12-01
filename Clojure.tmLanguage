@@ -34,12 +34,97 @@
 				</dict>
 			</array>
 		</dict>
-		<key>comment</key>
+		<key>anything</key>
+		<dict>
+			<key>name</key>
+			<string>anything</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>([^\(\)\[\]]*)</string>
+					<key>name</key>
+					<string>nonbracket</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comment_list</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comment_vector</string>
+				</dict>
+			</array>
+		</dict>
+		<key>argument_literal</key>
 		<dict>
 			<key>match</key>
-			<string>;.*$\n?</string>
+			<string>(%(&amp;|([1-9][0-9]*)))</string>
+			<key>name</key>
+			<string>meta.lambda.argument</string>
+		</dict>
+		<key>comment</key>
+		<dict>
 			<key>name</key>
 			<string>comment.line.clojure</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>;.*$\n?</string>
+					<key>name</key>
+					<string>comment.line.clojure</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\(comment</string>
+					<key>contentName</key>
+					<string>comment.form.clojure</string>
+					<key>end</key>
+					<string>\)</string>
+					<key>name</key>
+					<string>comment.macro.clojure</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#anything</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>comment_list</key>
+		<dict>
+			<key>begin</key>
+			<string>(\()</string>
+			<key>end</key>
+			<string>(\))</string>
+			<key>name</key>
+			<string>comment_list</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#anything</string>
+				</dict>
+			</array>
+		</dict>
+		<key>comment_vector</key>
+		<dict>
+			<key>begin</key>
+			<string>(\[)</string>
+			<key>end</key>
+			<string>(\])</string>
+			<key>name</key>
+			<string>comment_vector</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#anything</string>
+				</dict>
+			</array>
 		</dict>
 		<key>deref</key>
 		<dict>
@@ -78,15 +163,19 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#deref</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#keyword</string>
+					<string>#argument_literal</string>
 				</dict>
 				<dict>
 					<key>include</key>
 					<string>#number</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#qualified_symbol</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#keyword</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -110,10 +199,19 @@
 		</dict>
 		<key>keyword</key>
 		<dict>
-			<key>match</key>
-			<string>([\:][^\(\)\[\]\{\}\;\^\~\`\'\"\@\ \n\r\t\:\/\#\\]*)</string>
 			<key>name</key>
 			<string>meta.keyword.clojure</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#qualified_keyword</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#unqualified_keyword</string>
+				</dict>
+			</array>
 		</dict>
 		<key>list</key>
 		<dict>
@@ -157,9 +255,43 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#ratio</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#integer</string>
 				</dict>
 			</array>
+		</dict>
+		<key>qualified_keyword</key>
+		<dict>
+			<key>begin</key>
+			<string>(::)</string>
+			<key>end</key>
+			<string>(?=\W)</string>
+			<key>name</key>
+			<string>meta.keyword.qualified.clojure</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#symbol</string>
+				</dict>
+			</array>
+		</dict>
+		<key>qualified_symbol</key>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\])(?&lt;sym&gt;\g&lt;c&gt;|[0-9#%'\.])*\/\g&lt;sym&gt;+</string>
+			<key>name</key>
+			<string>symbol.qualified</string>
+		</dict>
+		<key>ratio</key>
+		<dict>
+			<key>match</key>
+			<string>(0|\-?[1-9][0-9]*)\/(0|\-?[1-9][0-9]*)</string>
+			<key>name</key>
+			<string>ratio</string>
 		</dict>
 		<key>regex</key>
 		<dict>
@@ -185,7 +317,7 @@
 		<key>repl_prompt</key>
 		<dict>
 			<key>match</key>
-			<string>([\n]|^)([^\(\)\[\]\{\}\;\^\~\`\'\"\@\ \n\r\t\:\/\#\\]+►)</string>
+			<string>([\n]|^)((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\])+►)</string>
 			<key>name</key>
 			<string>meta.symbol.repl_prompt</string>
 		</dict>
@@ -214,19 +346,30 @@
 		</dict>
 		<key>special_form</key>
 		<dict>
-			<key>begin</key>
-			<string>([\`\~\'\@]+)</string>
-			<key>contentName</key>
-			<string>meta.specialized.clojure</string>
-			<key>end</key>
-			<string>([ \n\t\r])</string>
 			<key>name</key>
 			<string>meta.special_form.clojure</string>
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>include</key>
-					<string>#all</string>
+					<key>match</key>
+					<string>([`~'@](?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\])(\g&lt;c&gt;|[0-9#%'])*)</string>
+					<key>name</key>
+					<string>meta.specialized.clojure</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(\()</string>
+					<key>end</key>
+					<string>(\))</string>
+					<key>name</key>
+					<string>meta.specialized.clojure</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#all</string>
+						</dict>
+					</array>
 				</dict>
 			</array>
 		</dict>
@@ -261,9 +404,29 @@
 		<key>symbol</key>
 		<dict>
 			<key>match</key>
-			<string>\b(?&lt;character&gt;[^\(\)\[\]\{\}\;\^\~\`\'\"\@\ \n\r\t\:\/\#\\])((\g&lt;character&gt;)|[0-9\#\%\'])*\b</string>
+			<string>(?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\])(\g&lt;c&gt;|[0-9#%'])*</string>
 			<key>name</key>
 			<string>symbol</string>
+		</dict>
+		<key>unqualified_keyword</key>
+		<dict>
+			<key>begin</key>
+			<string>(:[^:])</string>
+			<key>end</key>
+			<string>()\b</string>
+			<key>name</key>
+			<string>meta.keyword.unqualified.clojure</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#qualified_symbol</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#symbol</string>
+				</dict>
+			</array>
 		</dict>
 		<key>vec</key>
 		<dict>

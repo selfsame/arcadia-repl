@@ -46,17 +46,6 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>comment</string>
-			<key>scope</key>
-			<string>comment</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#545454</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>name</key>
 			<string>sexpr</string>
 			<key>scope</key>
 			<string>meta.sexpr entity.sequence</string>
@@ -252,6 +241,39 @@
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>symbol.qualified</string>
+			<key>scope</key>
+			<string>symbol.qualified, meta.sexpr symbol.qualified</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#30FF00</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>keyword</string>
+			<key>scope</key>
+			<string>meta.keyword, meta.keyword symbol, meta.keyword symbol.qualified</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#984CFF</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>keyword</string>
+			<key>scope</key>
+			<string>meta.keyword.qualified, meta.keyword.qualified symbol</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#C01AFE</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
 			<string>integer</string>
 			<key>scope</key>
 			<string>integer</string>
@@ -263,6 +285,17 @@
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>ratio</string>
+			<key>scope</key>
+			<string>ratio</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#00FF96</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
 			<string>float</string>
 			<key>scope</key>
 			<string>float</string>
@@ -270,17 +303,6 @@
 			<dict>
 				<key>foreground</key>
 				<string>#FF5A00</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>keyword</string>
-			<key>scope</key>
-			<string>meta.keyword</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#984CFF</string>
 			</dict>
 		</dict>
 		<dict>
@@ -372,6 +394,19 @@
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>meta.lambda.argument</string>
+			<key>scope</key>
+			<string>meta.lambda.argument</string>
+			<key>settings</key>
+			<dict>
+				<key>fontStyle</key>
+				<string>italic</string>
+				<key>foreground</key>
+				<string>#00E4FF</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
 			<string>illegal</string>
 			<key>scope</key>
 			<string>invalid</string>
@@ -396,6 +431,17 @@
 				<string>bold italic</string>
 				<key>foreground</key>
 				<string>#FFC500</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>comment</string>
+			<key>scope</key>
+			<string>comment</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#545454</string>
 			</dict>
 		</dict>
 	</array>

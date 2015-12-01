@@ -21,10 +21,7 @@ settings:
     selectionForeground: '#95F7D1'
 
 
-- name: comment
-  scope: comment
-  settings:
-    foreground: '#545454'
+
 
 
 - name: sexpr
@@ -103,21 +100,37 @@ settings:
   settings:
     foreground: '#867C76'
 
+- name: symbol.qualified
+  scope: 'symbol.qualified, meta.sexpr symbol.qualified'
+  settings:
+    foreground: '#30FF00'
+
+- name: keyword
+  scope: 'meta.keyword, meta.keyword symbol, meta.keyword symbol.qualified'
+  settings:
+    foreground: '#984CFF'
+
+- name: keyword
+  scope: 'meta.keyword.qualified, meta.keyword.qualified symbol'
+  settings:
+    foreground: '#C01AFE'
 
 - name: integer
   scope: integer
   settings:
     foreground: '#FFDE00'
 
+- name: ratio
+  scope: ratio
+  settings:
+    foreground: '#00FF96'
+
 - name: float
   scope: float
   settings:
     foreground: '#FF5A00'
 
-- name: keyword
-  scope: meta.keyword
-  settings:
-    foreground: '#984CFF'
+
 
 - name: deref
   scope: meta.deref
@@ -159,6 +172,12 @@ settings:
     background: '#221105'
     foreground: '#3B93FF'
 
+- name: meta.lambda.argument
+  scope: 'meta.lambda.argument'
+  settings:
+    fontStyle: 'italic'
+    foreground: '#00E4FF'
+
 - name: illegal
   scope: 'invalid'
   settings:
@@ -172,3 +191,8 @@ settings:
     fontStyle: 'bold italic'
     background: '#000000'
     foreground: '#FFC500'
+
+- name: comment
+  scope: 'comment'
+  settings:
+    foreground: '#545454'

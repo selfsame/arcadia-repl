@@ -10,13 +10,14 @@
 	(:use [cljs.pprint :only [pprint]]))
  
 (enable-console-print!)
- 
+ thing.core/asdlfkj
 ($/append ($ "head") 
 	($ "<style>#chart{font-size:.7em; font-family:courier;} 
 			.column{display:inline-block; width:150px; border-right:1px solid black; padding:.2em .5em; border-bottom:1px dotted silver;}</style>"))
 
-thing.core
+(ts.core/foo)
 
+@sldf
 (ns rainbow.sexpress)
 
 (quote [
@@ -25,18 +26,22 @@ thing.core
 ((((()))))
 (((())))])
 
-'([(((([[][{[(())] ({([])[]})}] ]))))])
-'( ( ( ( ( ( ( ( ( ) ) ) ) ) ) ) ) 
+'([(((([[][{[(())] ({([])[]})}] ]))))] )
+
+'(( ( ( ( ( ( ( ( ) ) ) ) ) ) ) ) ) () ()
+
 '([([([([([([([([([( )])])])])])])])])])
+
 '((((((()))))))
 '[() (())  [ (([([()])]))]]
 '(((( [[ [[ (( [ ( [ ()])]))]]]]))))[ [[[] ]]]
 
 ;asdfjhasdf
-
-
-
-
+@(joe) 
+foo.core
+@(foo@@@(@@fo@@o)) )
+`[sdfj sdf ]
+@joe 
 
 
 (def app-state (atom {
@@ -49,18 +54,20 @@ thing.core
   
 (def stars? #{:stars})
 (def rgb? #(re-find #"rgb$" (str %)))
- 
- (comment 
-(defn read [data k]
-	(if-let [local (get  @(:state data) k)]
+(comment [ asdf] )
+ (comment foo (sdlfkj))
+
+(comment 
+(defn read [data k] ;hello world
+	(if-let [local (get (:state data) k) ]
     {:value local}
     {:value :not-found})))
 
-
+@atom 
 (defpdf read)
 
 (pdf read [data k]
-  (get @(:state data) k :not-found))
+  (get @(:state data) k :not-found ) )
 
 (pdf read [data k _]
 	(get @(:state data) k :not-found))
@@ -75,10 +82,12 @@ thing.core
 	{k #{:app/title}}
 	{:value (reverse (get @(:state data) k))})
 
- 
+`(thing blah)
 (defn mutate [_ _ _] {})
 
+(thing/foo.core) 
 
+([[(([[ {} ]]))]])
 (defui Star
   static om/IQuery
   (query [this] '[:class :color/rgb :color/hex])
@@ -96,7 +105,21 @@ thing.core
 						(:color/hex props)) )))))
 
 (def star (om/factory Star))
+(:sdfklj/foo)
+awef$sdjf
+%1
+(def rgb? #(re-find #"rgb$" (str %)))
+::thing
+::foo.bar/quaz
+@( foo )
+(map 
+  #(* % %) 
+  (::thing ) {:foo.core/thing 
+            [1 2/7 3 4.6]})
 
+clojure.string/lowercase
+
+(comment 
 (defui Widget
 	static om/IQueryParams
   (params [this]
@@ -122,7 +145,7 @@ thing.core
           (om/params this))
 				(<div#chart
 					(map #(<span.column %) (clj->js (keys (last (last stars)))))
-					(map #(star (assoc (last %) :om-index (gensym))) stars))))))
+					(map #(star (assoc (last %) :om-index (gensym))) stars)))))))
  
 
 (def reconciler (om/reconciler {:state app-state :parser (om/parser {:read read :mutate mutate})}))

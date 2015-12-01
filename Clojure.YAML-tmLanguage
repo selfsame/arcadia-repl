@@ -9,9 +9,39 @@ patterns:
 - include: '#all'
 
 repository:
+  anything:
+    name: anything
+    patterns:
+    - name: nonbracket
+      match: ([^\(\)\[\]]*)
+    - include: '#comment_list'
+    - include: '#comment_vector'
+
+  comment_list:
+    name: comment_list
+    begin: (\()
+    end: (\))
+    patterns:
+    - include: '#anything'
+
+  comment_vector:
+    name: comment_vector
+    begin: (\[)
+    end: (\])
+    patterns:
+    - include: '#anything'
+
   comment:
     name: comment.line.clojure
-    match: ;.*$\n?
+    patterns:
+    - name: comment.line.clojure
+      match: ;.*$\n?
+    - name: comment.macro.clojure
+      begin: \(comment
+      end: \)
+      contentName: comment.form.clojure
+      patterns:
+      - include: '#anything'
 
   all:
     patterns:
@@ -26,10 +56,12 @@ repository:
     - include: '#regex'
     - include: '#sexpr'
     - include: '#special_form'
-    - include: '#deref'
-    - include: '#keyword'
+    - include: '#argument_literal'
     - include: '#number'
+    - include: '#qualified_symbol'
+    - include: '#keyword'
     - include: '#symbol'
+
 
   sexpr:
     name: meta.sexpr.clojure
@@ -62,27 +94,31 @@ repository:
   number:
     patterns:
     - include: '#float'
+    - include: '#ratio'
     - include: '#integer'
 
   float:
     name: float
     match: (\-?[0-9]+\.[0-9]+)
 
+  ratio:
+    name: ratio
+    match: (0|\-?[1-9][0-9]*)\/(0|\-?[1-9][0-9]*)
+
   integer:
     name: integer
     match: (0|\-?[1-9][0-9]*)
 
-  symbol:
-    name: symbol
-    match: \b(?<character>[^\(\)\[\]\{\}\;\^\~\`\'\"\@\ \n\r\t\:\/\#\\])((\g<character>)|[0-9\#\%\'])*\b
-
   special_form:
     name: meta.special_form.clojure
-    begin: ([\`\~\'\@]+)
-    end: ([ \n\t\r])
-    contentName: meta.specialized.clojure
     patterns:
-    - include: '#all'
+    - name: meta.specialized.clojure
+      match: ([`~'@](?<c>[^\(\)\[\]{};#%\^~`'":@\s\/\\])(\g<c>|[0-9#%'])*)
+    - name: meta.specialized.clojure
+      begin: (\()
+      end: (\))
+      patterns:
+      - include: '#all'
 
   special:
     name: meta.special.clojure
@@ -94,11 +130,44 @@ repository:
 
   keyword:
     name: meta.keyword.clojure
-    match: ([\:][^\(\)\[\]\{\}\;\^\~\`\'\"\@\ \n\r\t\:\/\#\\]*)
+    patterns:
+    - include: '#qualified_keyword'
+    - include: '#unqualified_keyword'
+
+
+  qualified_keyword:
+    name: meta.keyword.qualified.clojure
+    begin: (::)
+    end: (?=\W)
+    patterns:
+      - include: '#symbol'
+
+  unqualified_keyword:
+    name: meta.keyword.unqualified.clojure
+    begin: (:[^:])
+    end: ()\b
+    patterns:
+    - include: '#qualified_symbol'
+    - include: '#symbol'
+
+
+
+  qualified_symbol:
+    name: symbol.qualified
+    match: (?<c>[^\(\)\[\]{};#%\^~`'":@\s\/\\])(?<sym>\g<c>|[0-9#%'\.])*\/\g<sym>+
+
+  symbol:
+    name: symbol
+    match: (?<c>[^\(\)\[\]{};#%\^~`'":@\s\/\\])(\g<c>|[0-9#%'])*
+
+  argument_literal:
+    name: meta.lambda.argument
+    match: (%(&|([1-9][0-9]*)))
+
 
   repl_prompt:
     name: meta.symbol.repl_prompt
-    match: ([\n]|^)([^\(\)\[\]\{\}\;\^\~\`\'\"\@\ \n\r\t\:\/\#\\]+►)
+    match: ([\n]|^)((?<c>[^\(\)\[\]{};#%\^~`'":@\s\/\\])+►)
 
 
   regex:
