@@ -8,6 +8,6 @@
     "line_padding_bottom": 1,
     "always_show_minimap_viewport": false,
     "draw_minimap_border": false,
-    "word_wrap": true,
+    "word_wrap": false,
     "color_scheme": "Packages/arcadia-repl/clojure-dark.tmTheme"
 }

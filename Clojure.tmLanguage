@@ -99,7 +99,7 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#repl_prompt</string>
+					<string>#repl</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -231,7 +231,7 @@
 		<key>dynamic_word</key>
 		<dict>
 			<key>match</key>
-			<string>([\*])((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\\. \*])(\g&lt;c&gt;|[0-9#%'\.])*)([\*])</string>
+			<string>([\*])((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\\. \*\r\n])(\g&lt;c&gt;|[0-9#%'\.])*)([\*])</string>
 			<key>name</key>
 			<string>word.dynamic</string>
 		</dict>
@@ -375,7 +375,7 @@
 			<key>begin</key>
 			<string>::</string>
 			<key>end</key>
-			<string>(?=.)</string>
+			<string>(?=.)|(?=\n)</string>
 			<key>name</key>
 			<string>meta.keyword.qualified.clojure</string>
 			<key>patterns</key>
@@ -397,7 +397,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\])(\g&lt;c&gt;|[0-9#%'])+)([\/])(\g&lt;c&gt;(\g&lt;c&gt;|[0-9#%'])+)</string>
+			<string>((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\\r\n])(\g&lt;c&gt;|[0-9#%'])+)([\/])(\g&lt;c&gt;(\g&lt;c&gt;|[0-9#%'\.])+)</string>
 			<key>name</key>
 			<string>qualified</string>
 		</dict>
@@ -447,12 +447,22 @@
 				</dict>
 			</array>
 		</dict>
+		<key>repl</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#repl_prompt</string>
+				</dict>
+			</array>
+		</dict>
 		<key>repl_prompt</key>
 		<dict>
 			<key>match</key>
-			<string>([\n]|^)((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\])+►)</string>
+			<string>([\n\r]+|^)((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\])+(=&gt;|&gt;))</string>
 			<key>name</key>
-			<string>meta.repl_prompt</string>
+			<string>repl.prompt</string>
 		</dict>
 		<key>scientific</key>
 		<dict>
@@ -845,7 +855,7 @@
 			<key>begin</key>
 			<string>:(?!:)</string>
 			<key>end</key>
-			<string>(?=.)</string>
+			<string>(?=.)|(?=\n)</string>
 			<key>name</key>
 			<string>meta.keyword.unqualified.clojure</string>
 			<key>patterns</key>
@@ -863,7 +873,7 @@
 		<key>word</key>
 		<dict>
 			<key>match</key>
-			<string>((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\\. ])(\g&lt;c&gt;|[0-9#%'\*\.])*)</string>
+			<string>((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\\.\s])(\g&lt;c&gt;|[0-9#%'\*\.])*)</string>
 			<key>name</key>
 			<string>word</string>
 		</dict>

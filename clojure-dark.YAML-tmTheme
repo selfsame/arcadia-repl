@@ -69,7 +69,7 @@ settings:
 - name: word
   scope: 'word, qualified'
   settings:
-    foreground: '#927462'
+    foreground: '#959A64'
 
 - name: dymaic
   scope: 'word.dynamic'
@@ -80,13 +80,13 @@ settings:
 - name: clojure.core
   scope: 'storage.clojure.core'
   settings:
-    foreground: '#FF863D'
+    foreground: '#D67B28'
 
 
 - name: namespace
   scope: 'qualified namespace'
   settings:
-    foreground: '#357333'  
+    foreground: '#009DFE'  
  
 
 
@@ -111,14 +111,15 @@ settings:
   scope: 'string.quoted.double.clojure'
   settings:
     fontStyle: ' italic'
-    foreground: '#168834'
+
+    foreground: '#47DA54'
 
 - name: regex
   scope: string.quoted.regex.clojure
   settings:
     fontStyle: bold
     background: '#1F0307'
-    foreground: '#96FF00'
+    foreground: '#00EF93'
 
 - name: char
   scope: 'constant.character.escape'
@@ -248,9 +249,39 @@ settings:
   settings:
     foreground: '#949494'
 
+
 - name: repl_prompt
-  scope: 'meta.repl_prompt'
+  scope: 'repl.prompt'
   settings:
     fontStyle: 'bold italic'
-    background: '#000000'
     foreground: '#FFC500'
+    
+# - name: Error
+#   scope: 'repl.Error'
+#   settings:
+#     fontStyle: 'bold italic'
+#     background: '#230E00'
+#     foreground: '#F00E3F'
+
+# - name: Warning
+#   scope: 'repl.Warning'
+#   settings:
+#     fontStyle: 'bold italic'
+#     background: '#230E00'
+#     foreground: '#DE6F20'
+
+# - name: escape.code
+#   scope: 'repl.escape.black'
+#   settings:
+#     foreground: '#FFFFFF'
+
+# - name: escape.code
+#   scope: 'repl.escape.red'
+#   settings:
+#     foreground: '#FF0000'
+
+# - name: escape.code
+#   scope: 'repl.escape.code'
+#   settings:
+#     background: '#0F1214'
+#     foreground: '#0F1214'

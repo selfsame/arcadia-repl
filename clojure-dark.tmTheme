@@ -169,7 +169,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#927462</string>
+				<string>#959A64</string>
 			</dict>
 		</dict>
 		<dict>
@@ -191,7 +191,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FF863D</string>
+				<string>#D67B28</string>
 			</dict>
 		</dict>
 		<dict>
@@ -202,7 +202,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#357333</string>
+				<string>#009DFE</string>
 			</dict>
 		</dict>
 		<dict>
@@ -237,7 +237,7 @@
 				<key>fontStyle</key>
 				<string> italic</string>
 				<key>foreground</key>
-				<string>#168834</string>
+				<string>#47DA54</string>
 			</dict>
 		</dict>
 		<dict>
@@ -252,7 +252,7 @@
 				<key>fontStyle</key>
 				<string>bold</string>
 				<key>foreground</key>
-				<string>#96FF00</string>
+				<string>#00EF93</string>
 			</dict>
 		</dict>
 		<dict>
@@ -503,11 +503,9 @@
 			<key>name</key>
 			<string>repl_prompt</string>
 			<key>scope</key>
-			<string>meta.repl_prompt</string>
+			<string>repl.prompt</string>
 			<key>settings</key>
 			<dict>
-				<key>background</key>
-				<string>#000000</string>
 				<key>fontStyle</key>
 				<string>bold italic</string>
 				<key>foreground</key>

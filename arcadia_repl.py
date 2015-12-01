@@ -38,7 +38,7 @@ def send_repl(text):
 
 def format_input_text(text):
     print(text)
-    res = text.replace("=>", "►", 1).replace("\r", "")
+    res = text.replace("=>", "=>", 1).replace("\r", "")
     error = re.findall(r"(\w[^:\W\n]+): ([^\n]+)\n", res)
     if len(error) > 0:
         _ns = re.split("\n", res)[-1]

@@ -116,6 +116,7 @@ fo.bazo/core
 						(style {:background (:color/hex props)})
 						(:color/hex props)) )))))
 [[[[[[[]]]]]]]
+
 ;TODO
 ; [x] #_ ignore pair
 ; [ ] fix newlines breaking basic forms
@@ -168,11 +169,26 @@ methods userland foo.core/qualified
 ;TODO fix-sexpr
 [ {'foo}]
 
+;TODO why is this recursing?
+;;form-init3272591183026652226.clj
 
 
 
+(def subscript 
+  {0 '₀ 1 '₁ 2 '₂ 3 '₃ 4 '₄ 5 '₅ 6 '₆ 7 '₇ 8 '₈ 9 '₉ '+ '₊ '- '₋ '= '₌ :open '₍ :close '₎})
 
+(defn sub-int [n] 
+  (symbol (apply str 
+    (concat 
+      (if (neg? n) ['₋] []) 
+      (mapv (comp 
+        #(get subscript % '?) 
+        int 
+        str) 
+      (seq (str (int n))))))))
 
+(defn sub-list [s] 
+  (symbol (apply str (concat ['₍] [s] ['₎]))))
 #_
 (defn baz [a b c]
   (map 
