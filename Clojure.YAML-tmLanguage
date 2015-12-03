@@ -238,8 +238,8 @@ repository:
   symbol:
     name: symbol
     patterns:
-    - include: '#qualified_symbol'
-    - include: '#dynamic_word'
+    # - include: '#qualified_symbol'
+    # - include: '#dynamic_word'
     - include: '#word'
 
   dynamic_word:
@@ -255,7 +255,7 @@ repository:
  
   word:
     name: word
-    match: ((?<c>[^\(\)\[\]{};#%\^~`'":@\s\/\\\.\s])(\g<c>|[0-9#%'\*\.])*)
+    match: ((?<c>[^\(\)\[\]{};#%\^~`'":@\s\/\\\.\s])(\g<c>|[0-9#%'\*\.])+)
 
 
 

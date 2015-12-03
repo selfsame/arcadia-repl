@@ -1,7 +1,6 @@
-#_     (asdf)
 
-(farts)foo 
-(thing) foo
+(farts) foo 
+(thing)  foo
 
  '[foo `(bar )]asdf [foo ]
 
@@ -19,7 +18,7 @@
 	(:use [cljs.pprint :only [pprint]])) (foo) sdf 
 
 lsdfk.cheese/*foo*
-    cat
+   cat
 foo
 foo.core/*baz*
 
@@ -88,7 +87,7 @@ fo.bazo/core
 
 (pdf read [data k props]
   {props (and* :start :end)}
-  (let [local (get  @(:state data) k)
+     (let [local (get  @(:state data) k)
         {:keys [start end]} props]
     {:value (take (- end start) (drop start local))}))
 
@@ -169,8 +168,8 @@ methods userland foo.core/qualified
 ;TODO fix-sexpr
 [ {'foo}]
 
-;TODO why is this recursing?
-;;form-init3272591183026652226.clj
+;TODO why is this recursing? - qualified_symbol: to blame
+;form-init3272591183026652226.clj
 
 
 

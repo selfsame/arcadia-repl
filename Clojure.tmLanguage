@@ -836,14 +836,6 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#qualified_symbol</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#dynamic_word</string>
-				</dict>
-				<dict>
-					<key>include</key>
 					<string>#word</string>
 				</dict>
 			</array>
@@ -873,7 +865,7 @@
 		<key>word</key>
 		<dict>
 			<key>match</key>
-			<string>((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\\.\s])(\g&lt;c&gt;|[0-9#%'\*\.])*)</string>
+			<string>((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\\.\s])(\g&lt;c&gt;|[0-9#%'\*\.])+)</string>
 			<key>name</key>
 			<string>word</string>
 		</dict>
