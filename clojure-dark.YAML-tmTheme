@@ -176,7 +176,7 @@ settings:
 - name: special.instance
   scope: 'meta.special.instance'
   settings:
-    foreground: '#304CF5'
+    foreground: '#A5217B'
 
 
 

@@ -49,7 +49,7 @@ def format_input_text(text):
 def update(window):
     repl = get_repl(window)
     try:
-        data = format_input_text(sock.recvfrom(1024)[0].decode("utf-8"))
+        data = format_input_text(sock.recvfrom(4096)[0].decode("utf-8"))
         repl.run_command("arcadia_repl_insert", {"data":"\n"+data})
     except: None
     sublime.set_timeout(lambda: update(window), 100)
