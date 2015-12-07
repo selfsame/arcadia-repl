@@ -49,7 +49,7 @@ def format_input_text(text):
 def update(window):
     repl = get_repl(window)
     try:
-        data = format_input_text(sock.recvfrom(1024)[0].decode("utf-8"))
+        data = format_input_text(sock.recvfrom(4096)[0].decode("utf-8"))
         repl.run_command("arcadia_repl_insert", {"data":"\n"+data})
     except: None
     sublime.set_timeout(lambda: update(window), 100)
@@ -94,18 +94,15 @@ class ArcadiaReplHistoryCommand(sublime_plugin.TextCommand):
 
 def format_transfered_text(view, text):
     namespacedecl = view.find(r"^[^;]*?\(", 0)
-    if namespacedecl and view.scope_name(namespacedecl.end()-1).startswith("source.clojure meta.function.namespace.clojure"):
+    
+    if namespacedecl and view.scope_name(namespacedecl.end()-1).startswith("source.clojure"):
         namespacedecl = view.extract_scope(namespacedecl.end()-1)
         pos = namespacedecl.begin() + 3
         while pos < namespacedecl.end():
             namespace = view.find(r"[\}\s][A-Za-z\_!\?\*\+\-][\w!\?\*\+\-:]*(\.[\w!\?\*\+\-:]+)*", pos)
-            if not namespace:
-                break
-            elif view.scope_name(namespace.begin() + 1).startswith("source.clojure meta.function.namespace.clojure entity.name.namespace.clojure"):
-                text = "(do (in-ns '" + view.substr(namespace)[1:] + ")" + text + ")"
-                break
-            else:
-                pos = namespace.end()
+            print([view.substr(namespace)[1:]])
+            #return "(binding [*ns* (or (find-ns '" + view.substr(namespace)[1:] + ") (ns 'user))] " + text + ")"
+            return "(do (in-ns '" + view.substr(namespace)[1:] + ") " + text + ")"
     return text
 
 class ArcadiaReplTransferCommand(sublime_plugin.TextCommand):
@@ -123,7 +120,6 @@ class ArcadiaReplTransferCommand(sublime_plugin.TextCommand):
             elif scope == "file":
                 regions = [sublime.Region(0, self.view.size())]
         for pair in regions: 
-            print(pair)
             for text in find_blocks(self.view, pair.a, pair.b):
                 print(text)
                 send_repl(format_transfered_text(self.view, text))

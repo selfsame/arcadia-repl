@@ -2,7 +2,7 @@
     "tab_size": 2,
     //"font_options":["directwrite"],
     "translate_tabs_to_spaces": true,
-    "line_numbers": false,
+    "line_numbers": true,
     "gutter": false,
     "line_padding_top": 0,
     "line_padding_bottom": 1,
