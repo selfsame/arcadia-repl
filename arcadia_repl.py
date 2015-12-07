@@ -14,7 +14,8 @@ def create_repl(window):
     repl = window.new_file()
     repl.set_name("*REPL* (arcadia)")
     repl.settings().set("arcadia_repl", True)
-    repl.settings().set("scope_name", "source.repl")
+    repl.settings().set("scope_name", "source.clojure")
+    repl.settings().set("word_wrap", True)
     repl.set_scratch(True)
     repl.set_syntax_file("Packages/arcadia-repl/Clojure.tmLanguage")
     window.set_view_index(repl, group + 1, len(window.views_in_group(group + 1)))
@@ -37,12 +38,12 @@ def send_repl(text):
     sock.sendto(text.encode('utf-8'), (UDP_IP, UDP_PORT))
 
 def format_input_text(text):
-    print(text)
+    #print(text)
     res = text.replace("=>", "=>", 1).replace("\r", "")
     error = re.findall(r"(\w[^:\W\n]+): ([^\n]+)\n", res)
     if len(error) > 0:
         _ns = re.split("\n", res)[-1]
-        res = "".join(re.split("\n", res)[1:-1]).replace("  at ", "\n").replace(" in ", "\n  ").replace(" (", "\n  (")
+        res = "".join(re.split("\n", res)[1:1]).replace("  at ", "\n").replace(" in .*", "").replace(" (", "\n  (")
         res = ":" + str(error[0][0]) + "\n\""+error[0][1] + "\"" + res +"\n"+_ns
     return res 
 
@@ -100,7 +101,7 @@ def format_transfered_text(view, text):
         pos = namespacedecl.begin() + 3
         while pos < namespacedecl.end():
             namespace = view.find(r"[\}\s][A-Za-z\_!\?\*\+\-][\w!\?\*\+\-:]*(\.[\w!\?\*\+\-:]+)*", pos)
-            print([view.substr(namespace)[1:]])
+            #print([view.substr(namespace)[1:]])
             #return "(binding [*ns* (or (find-ns '" + view.substr(namespace)[1:] + ") (ns 'user))] " + text + ")"
             return "(do (in-ns '" + view.substr(namespace)[1:] + ") " + text + ")"
     return text
@@ -110,7 +111,15 @@ class ArcadiaReplTransferCommand(sublime_plugin.TextCommand):
         repl = get_repl(self.view.window())
         regions, sel = [],[]
         for region in self.view.sel(): sel.append(region)
-        if scope == "block": self.view.run_command("expand_selection", {"to": "brackets"})
+        if scope == "block": 
+            self.view.run_command("expand_selection", {"to": "brackets"})
+            if self.view.substr(self.view.sel()[0]) == "":
+                _s = self.view.sel()[0]
+                self.view.run_command("expand_selection", {"to": "line"})
+                send_repl(format_transfered_text(self.view, self.view.substr(self.view.sel()[0])))
+                self.view.sel().clear()
+                self.view.sel().add(_s)
+                return True
         for idx in range(len(self.view.sel())):
             if scope == "selection":
                 s = self.view.sel()[idx]
@@ -121,7 +130,7 @@ class ArcadiaReplTransferCommand(sublime_plugin.TextCommand):
                 regions = [sublime.Region(0, self.view.size())]
         for pair in regions: 
             for text in find_blocks(self.view, pair.a, pair.b):
-                print(text)
+                #print(text)
                 send_repl(format_transfered_text(self.view, text))
         self.view.sel().clear()
         for region in sel: self.view.sel().add(region)
@@ -131,7 +140,9 @@ def find_blocks(view, start, end):
     regions, res = [], []
     while idx < end:
         enclosure = view.find(r"\"[^\"]*\"|;[^\n]*\n|\(|\[|\{|\)|\]|\}", idx)
-        if not enclosure: break
+        if not enclosure: 
+            print(view.substr(enclosure))
+            break
         if view.substr(enclosure) in ("(", "[", "{"):
             if depth == 0: res.append(enclosure.a)
             depth += 1
