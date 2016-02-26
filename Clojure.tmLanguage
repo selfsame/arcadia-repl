@@ -681,7 +681,7 @@
 					<key>begin</key>
 					<string>(['][\n\r \s]*)</string>
 					<key>end</key>
-					<string>(?=[\s\)\(\[\]])</string>
+					<string>(?=[\s\)\(\[\]\{\}])</string>
 					<key>name</key>
 					<string>meta.special.quote</string>
 					<key>patterns</key>
@@ -698,7 +698,7 @@
 					<key>begin</key>
 					<string>([@][\n\r \s]*)</string>
 					<key>end</key>
-					<string>(?=[\s\)\(\[\]])</string>
+					<string>(?=[\s\)\(\[\]\{\}])</string>
 					<key>name</key>
 					<string>meta.special.deref</string>
 					<key>patterns</key>
@@ -715,7 +715,7 @@
 					<key>begin</key>
 					<string>([`][\n\r \s]*)</string>
 					<key>end</key>
-					<string>(?=[\s\)\(\[\]])</string>
+					<string>(?=[\s\)\(\[\]\{\}])</string>
 					<key>name</key>
 					<string>meta.special.backtick</string>
 					<key>patterns</key>
@@ -732,7 +732,7 @@
 					<key>begin</key>
 					<string>([~][\n\r \s]*)</string>
 					<key>end</key>
-					<string>(?=[\s\)\(\[\]])</string>
+					<string>(?=[\s\)\(\[\]\{\}])</string>
 					<key>name</key>
 					<string>meta.special.unquote</string>
 					<key>patterns</key>
@@ -787,7 +787,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>(?=[\s\r\n \(\[])</string>
+					<string>(?=[\s\r\n \(\[\{])</string>
 					<key>name</key>
 					<string>meta.special.ignore</string>
 					<key>patterns</key>
@@ -865,7 +865,7 @@
 		<key>word</key>
 		<dict>
 			<key>match</key>
-			<string>((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\\.\s])(\g&lt;c&gt;|[0-9#%'\*\.])+)</string>
+			<string>((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\\.\s])(\g&lt;c&gt;|[0-9#%'\*\.])*)</string>
 			<key>name</key>
 			<string>word</string>
 		</dict>

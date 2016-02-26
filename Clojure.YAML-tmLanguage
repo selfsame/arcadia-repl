@@ -135,25 +135,25 @@ repository:
       applyEndPatternLast: 1
       patterns:
       - include: '#all'
-      end: (?=[\s\)\(\[\]])
+      end: (?=[\s\)\(\[\]\{\}])
     - name: meta.special.deref
       begin: ([@][\n\r \s]*)
       applyEndPatternLast: 1
       patterns:
       - include: '#all'
-      end: (?=[\s\)\(\[\]])
+      end: (?=[\s\)\(\[\]\{\}])
     - name: meta.special.backtick
       begin: ([`][\n\r \s]*)
       applyEndPatternLast: 1
       patterns:
       - include: '#all'
-      end: (?=[\s\)\(\[\]])
+      end: (?=[\s\)\(\[\]\{\}])
     - name: meta.special.unquote
       begin: ([~][\n\r \s]*)
       applyEndPatternLast: 1
       patterns:
       - include: '#all'
-      end: (?=[\s\)\(\[\]])
+      end: (?=[\s\)\(\[\]\{\}])
     - name: meta.special.lambda
       begin: (#[\n\r \s]*\()
       patterns:
@@ -171,7 +171,7 @@ repository:
       applyEndPatternLast: 1
       patterns:
       - include: '#shadow_all'
-      end: (?=[\s\r\n \(\[])
+      end: (?=[\s\r\n \(\[\{])
 
 
 
@@ -255,7 +255,7 @@ repository:
  
   word:
     name: word
-    match: ((?<c>[^\(\)\[\]{};#%\^~`'":@\s\/\\\.\s])(\g<c>|[0-9#%'\*\.])+)
+    match: ((?<c>[^\(\)\[\]{};#%\^~`'":@\s\/\\\.\s])(\g<c>|[0-9#%'\*\.])*)
 
 
 

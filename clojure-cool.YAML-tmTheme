@@ -1,0 +1,305 @@
+# [PackageDev] target_format: plist, ext: tmTheme
+name: clojure-cool
+author: selfsame
+colorSpaceName: sRGB
+gutterSettings:
+  background: '#36463F'
+  divider: '#05386C'
+  foreground: '#5F7387'
+  selectionBackground: '#4f5b66'
+  selectionForeground: '#a7adba'
+semanticClass: clojure.cool
+settings:
+- settings:
+    background: '#181E1E'
+    caret: '#FFE400'
+    foreground: '#DCE594'
+    invisibles: '#0F335A'
+    lineHighlight: '#000000'
+    selection: '#F0EA8A'
+    selectionForeground: '#06033D'
+
+
+
+
+
+- scope: 'sexpr'
+  settings: {foreground: '#EE5656' }
+
+- scope: 'sexpr sexpr'
+  settings: { foreground: '#3594FF' }
+
+- scope: 'sexpr sexpr sexpr'
+  settings: { foreground: '#D7AB12' }
+
+- scope: 'sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#31C5C0' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#AF55D0' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#D38957' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#2B71FF' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#92DE26' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#99553D' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#8F6DFF' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#007C37' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#C55D5D' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#5D8EC5' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#EF852F' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#3594FF' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#EE5656' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#299F69' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#AF55D0' }
+
+
+
+- name: word
+  scope: 'word, qualified'
+  settings:
+    foreground: '#A59775'
+
+- name: dymaic
+  scope: 'word.dynamic'
+  settings:
+    foreground: '#E3D2D2'
+
+
+- name: clojure.core
+  scope: 'storage.clojure.core'
+  settings:
+    foreground: '#23C87C'
+
+
+- name: namespace
+  scope: 'qualified namespace'
+  settings:
+    foreground: '#009DFE'  
+ 
+
+
+
+- name: keyword
+  scope: 'meta.keyword, meta.keyword qualified namespace, meta.keyword word, meta.keyword qualified'
+  settings:
+    foreground: '#B64DFF'
+    background: '#161915'
+
+- name: keyword_qualified
+  scope: 'meta.keyword.qualified, meta.keyword.qualified qualified namespace, meta.keyword.qualified word, meta.keyword.qualified word'
+  settings:
+    foreground: '#FF00A8'
+    background: '#161915'
+
+
+
+
+
+
+- name: string_quoted
+  scope: 'string.quoted.double.clojure'
+  settings:
+    fontStyle: ' italic'
+
+    foreground: '#C5B672'
+
+- name: regex
+  scope: string.quoted.regex.clojure
+  settings:
+    fontStyle: bold
+    background: '#0C130A'
+    foreground: '#FFAE00'
+
+- name: char
+  scope: 'constant.character.escape'
+  settings:
+    fontStyle: 'bold'
+    background: '#221105'
+    foreground: '#3B93FF'
+
+
+
+
+
+- name: special.quote
+  scope: 'meta.special.quote, meta.special.quote sexpr'
+  settings:
+    background: '#121816'
+
+- name: special.deref
+  scope: 'meta.special.deref, meta.special.deref sexpr'
+  settings:
+    fontStyle: 'bold'
+    foreground: '#30FF00'
+    background: '#0C2602'
+
+- name: special.lambda
+  scope: 'meta.special.lambda'
+  settings:
+    fontStyle: 'italic'
+    foreground: '#00D8FF'
+
+- name: special.backtick
+  scope: 'meta.special.backtick, meta.special.backtick sexpr'
+  settings:
+    foreground: '#FF0000'
+    background: '#251B1D'
+
+- name: special.unquote
+  scope: 'meta.special.unquote, meta.special.unquote sexpr'
+  settings:
+    foreground: '#3DFF00'
+    background: '#2B372B'
+
+- name: special.ignore
+  scope: 'meta.special.ignore'
+  settings:
+    fontStyle: 'bold'
+    foreground: '#000000'
+
+- name: special.ignore.form
+  scope: 'meta.special.ignore.form'
+  settings:
+    fontStyle: 'bold'
+    foreground: '#000000'
+
+
+
+- name: special.instance
+  scope: 'meta.special.instance'
+  settings:
+    foreground: '#FF8E4A'
+
+
+
+- name: number.base
+  scope: number.base
+  settings:
+    foreground: '#00DEFF'
+
+- name: number.hexadecimal
+  scope: number.hexadecimal
+  settings:
+    foreground: '#FFD800'
+
+- name: integer
+  scope: number.integer
+  settings:
+    foreground: '#FFD800'
+
+- name: float
+  scope: number.float
+  settings:
+    foreground: '#FF6000'
+
+
+
+- name: meta.constant
+  scope: meta.constant
+  settings:
+    fontStyle: 'bold'
+    foreground: '#07A765'
+
+
+
+
+- name: illegal
+  scope: 'invalid, meta.special.lambda meta.special.lambda, source meta.lambda.argument'
+  settings:
+    fontStyle: 'bold'
+    foreground: '#FF0000'
+    background: '#170000'
+
+- name: meta.lambda.argument
+  scope: 'meta.special.lambda meta.lambda.argument'
+  settings:
+    foreground: '#00E4FF'
+
+
+
+
+
+- name: newline
+  scope: 'meta.newline, meta.indent'
+  settings:
+    background: '#181E1E'
+
+
+- name: comment
+  scope: 'comment'
+  settings:
+    background: '#141512'
+    foreground: '#A2A2A2'
+
+- name: comment.TODO
+  scope: 'comment.TODO'
+  settings:
+    foreground: '#D96BD8'
+
+
+- name: comment.TODO.text
+  scope: 'comment.TODO.text'
+  settings:
+    foreground: '#FFFFFF'
+
+
+- name: repl_prompt
+  scope: 'repl.prompt'
+  settings:
+    fontStyle: 'bold italic'
+    foreground: '#FFC500'
+    
+# - name: Error
+#   scope: 'repl.Error'
+#   settings:
+#     fontStyle: 'bold italic'
+#     background: '#230E00'
+#     foreground: '#F00E3F'
+
+# - name: Warning
+#   scope: 'repl.Warning'
+#   settings:
+#     fontStyle: 'bold italic'
+#     background: '#230E00'
+#     foreground: '#DE6F20'
+
+# - name: escape.code
+#   scope: 'repl.escape.black'
+#   settings:
+#     foreground: '#FFFFFF'
+
+# - name: escape.code
+#   scope: 'repl.escape.red'
+#   settings:
+#     foreground: '#FF0000'
+
+# - name: escape.code
+#   scope: 'repl.escape.code'
+#   settings:
+#     background: '#0F1214'
+#     foreground: '#0F1214'

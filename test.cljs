@@ -38,22 +38,11 @@ dfg
 
 
 (ns rainbow.sexpress)
-(((((())))))
-(quote [
-( ( ( ( ))))
-[[(((([[[]]]))))[[[] []]]]]
-((((()))))
-(((())))])
-
-'([(((([[][{[(())] ({([])[]})}] ]))))] )
-
-'(( ( ( ( ( ( ( @(+ 1 1) ) ) ) ) ) ) ) ) () ()
-
-'([([([([([([([([([( )])])])])])])])])])
-
-'((((((()))))))
-'[() (())  [ (([([()])]))]]
-'(((( [[ [[ (( [ ( [ ()])]))]]]]))))[ [[[] ]]]
+(quote 
+  ((((((((((((((((()))))))))))))))))
+  {{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}
+  [[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]
+  ({[({[({[({[({[({})]})]})]})]})]}))
 
 fo.bazo/core
 
@@ -61,20 +50,19 @@ fo.bazo/core
 	:app/title "Main Sequence Stars"
 	:stars (into {} 
 		(map 
-			(fn [[class rgb hex]] 
-				{class {:class class :color/rgb rgb :color/hex hex}})
+			(fn [[class rgb]] {class {:color/rgb rgb}})
 		data/stellar-colors))}))
   
 (def stars? #{:stars})
 (def rgb? #(re-find #"rgb$" (str %)))
-(comment [ asdf] )
- (comment foo (sdlfkj))
 
-(comment 
+(comment foo (sdlfkj))
+
+
 (defn read [data k] ;hello world
-	(if-let [local (get (:state data) k) ]
-    {:value local}
-    {:value :not-found})))
+	(if-let [#_ foo local (get (:state data) k) ]
+    (comment {:value local})
+    {:value :not-found}))
 *fart* 
 @atom 
 (defpdf read)
@@ -118,46 +106,48 @@ fo.bazo/core
 
 ;TODO
 ; [x] #_ ignore pair
-; [ ] fix newlines breaking basic forms
+; [x] fix newlines breaking basic forms
 ; [x] hashmap capture
 ;     [ ] sexpr pairs
 ; [x] special form scoping
 ; [x] illegalize nested lambdas, naked lambda args
 ; [x] scope for clojure.core fns
 
-; [ ] gensym foo#
 
+;rainbows
+(quote 
+  ((((((((((((((((()))))))))))))))))
+  {{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}
+  [[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]
+  ({[({[({[({[({[({})]})]})]})]})]}))
 
-
-#_ rainbows
-((((((((((((()))))))))))))
-[({[({[({[({[]})]})]})]})]
-
-#_ symbols
+;symbols
 methods userland foo.core/qualified
 
-#_ literals
+;literals
 12 2.9 3/6 0xBADA55 9r8012 07123 -1.2e-5 4.2M 18N 
 :keyword ::qualified :foo.core/resolved
-"Jane's sign said \"welcome\""
+"hello \"world\""  #"rgb$[\(]" 
 #<GameObject Foo (UnityEngine.GameObject)>
+{0 '₀ 1 '₁ 2 '₂ 3 '₃ 4 '₄ 5}
 
-#_ specials
+;specials
 @(atomic) @foo
-'( #(re-find #"rgb$\(" (str %3)))
+#(re-find #"rgb$\(" (str %3))
 
-'(reader [quoted @(form)])
+'(reader [quoted @(form) `(~@[1 2 3])])
 
-#_ macro-specials
+;macro-specials
 (defmacro fun [sym args & code] 
-  `(do
-      (prn ~[sym args])
-      (comment (def ~'foo 7))
-      (def ~sym [~'a b] 
-        ~@code)))
+  `(do #_'(prn ~[sym args]) 
+      '~@[sym args]
+       (comment (def ~'foo 7))
+       (def ~sym [~'a b] 
+          ~@code)))
 
 ;TODO illegalize
-[foo/ /baz  %1 ::foo.bar/quaz .67 #(#()) {1 2 3}]
+[foo/ /baz %1 ::foo.bar/quaz .67 #(#()) {1 2 3}]
+
 ;TODO legalize
 [:./d :. :./. ]
 
@@ -165,16 +155,27 @@ methods userland foo.core/qualified
 [clojure.pprint/*thing* #'foo foo#
  #?(:cljs reader-conditional) ^{:meta 'form }]
 
-;TODO fix-sexpr
-[ {'foo}]
-
-;TODO why is this recursing? - qualified_symbol: to blame
-;form-init3272591183026652226.clj
+;TODO fix
+(map 
+  (comp ;ridic
+  #(re-find #_ #"rgb$\("
+   (str %))
+      #(* % %)) 
+  (get {:foo.core/thing [1 2/7 3 4.6]}
+    ::thing)))
 
 
 
 (def subscript 
-  {0 '₀ 1 '₁ 2 '₂ 3 '₃ 4 '₄ 5 '₅ 6 '₆ 7 '₇ 8 '₈ 9 '₉ '+ '₊ '- '₋ '= '₌ :open '₍ :close '₎})
+  {0 '₀ 1 '₁ 2 '₂ 3 '₃ 4 '₄ 5 '₅ 6 '₆ 7 '₇ 8 '₈ 9 '₉ '+ '₊ '- '₋ '= '₌ :open '₍ :close '₎ })
+
+
+
+
+
+
+
+
 
 (defn sub-int [n] 
   (symbol (apply str 
@@ -188,9 +189,9 @@ methods userland foo.core/qualified
 
 (defn sub-list [s] 
   (symbol (apply str (concat ['₍] [s] ['₎]))))
-#_
+
 (defn baz [a b c]
-  (map 
+  #_(map 
     (comp ;ridic
       #(re-find #"rgb$\(" (str %))
       #(* % %)) 
