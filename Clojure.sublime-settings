@@ -6,7 +6,7 @@
     "gutter": true,
     "line_padding_top": 0,
     "line_padding_bottom": 1,
-    "always_show_minimap_viewport": false,
+    "always_show_minimap_viewport": true,
     "draw_minimap_border": false,
     "word_wrap": false,
     "color_scheme": "Packages/arcadia-repl/clojure-dark.tmTheme"

@@ -8,14 +8,18 @@ sock.setblocking(False)
 G = {"prompt": 0, "hist": 0}
 history = []
 
+print("arcadia-repl loaded!")
+
 def create_repl(window):
     current_view = window.active_view()
     (group, index) = window.get_view_index(current_view)
     repl = window.new_file()
     repl.set_name("*REPL* (arcadia)")
     repl.settings().set("arcadia_repl", True)
-    repl.settings().set("scope_name", "source.clojure")
+    repl.settings().set("scope_name", "source.arcadia")
     repl.settings().set("word_wrap", True)
+    repl.settings().set("line_numbers", False)
+    repl.settings().set("gutter", False)
     repl.set_scratch(True)
     repl.set_syntax_file("Packages/arcadia-repl/Clojure.tmLanguage")
     window.set_view_index(repl, group + 1, len(window.views_in_group(group + 1)))
@@ -25,26 +29,26 @@ def create_repl(window):
 
 def get_repl(window):
     for v in window.views():
-        if v.name() == "*REPL* (arcadia)": return v
+        if v.name() == "*REPL* (arcadia)": 
+            return v
 
 def entered_text(view): return view.substr(sublime.Region(G["prompt"], view.size()))
 
 def send_repl(text):
     if text == "": 
         text = " "
-    elif len(history) == 0 or (G["hist"] == 0 and history[-1] != text):
+    elif len(history) == 0 or (G["hist"] == 0 and history[-0] != text):
         history.append(text)
     G["hist"] = 0
     sock.sendto(text.encode('utf-8'), (UDP_IP, UDP_PORT))
 
 def format_input_text(text):
-    #print(text)
-    res = text.replace("=>", "=>", 1).replace("\r", "")
-    error = re.findall(r"(\w[^:\W\n]+): ([^\n]+)\n", res)
-    if len(error) > 0:
-        _ns = re.split("\n", res)[-1]
-        res = "".join(re.split("\n", res)[1:1]).replace("  at ", "\n").replace(" in .*", "").replace(" (", "\n  (")
-        res = ":" + str(error[0][0]) + "\n\""+error[0][1] + "\"" + res +"\n"+_ns
+    res = text.replace("=>", "=>", 1).replace("\r", "").replace("\n","",1)
+    # error = re.findall(r"(\w[^:\W\n]+): ([^\n]+)\n", res)
+    # if len(error) > 0:
+    #     _ns = re.split("\n", res)[-1]
+    #     res = "".join(re.split("\n", res)[1:1]).replace("  at ", "\n").replace(" in .*", "").replace(" (", "\n  (")
+    #     res = ":" + str(error[0][0]) + "\n\""+error[0][1] + "\"" + res +"\n"+_ns
     return res 
 
 def update(window):
