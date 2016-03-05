@@ -174,9 +174,6 @@ repository:
       end: (?=[\s\r\n \(\[\{])
 
 
-
-
-
   keyword:
     name: meta.keyword.clojure
     patterns:
@@ -189,6 +186,7 @@ repository:
     begin: :(?!:)
     applyEndPatternLast: 1
     patterns:
+    - match: (#)
     - include: '#qualified_symbol'
     - include: '#word'
     end: (?=.)|(?=\n)
@@ -198,6 +196,7 @@ repository:
     begin: '::'
     applyEndPatternLast: 1
     patterns:
+    - match: (#)
     - include: '#word'
     end: (?=.)|(?=\n)
 

@@ -381,6 +381,10 @@
 			<key>patterns</key>
 			<array>
 				<dict>
+					<key>match</key>
+					<string>(#)</string>
+				</dict>
+				<dict>
 					<key>include</key>
 					<string>#word</string>
 				</dict>
@@ -852,6 +856,10 @@
 			<string>meta.keyword.unqualified.clojure</string>
 			<key>patterns</key>
 			<array>
+				<dict>
+					<key>match</key>
+					<string>(#)</string>
+				</dict>
 				<dict>
 					<key>include</key>
 					<string>#qualified_symbol</string>

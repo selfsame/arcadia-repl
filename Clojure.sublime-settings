@@ -2,12 +2,11 @@
     "tab_size": 2,
     //"font_options":["directwrite"],
     "translate_tabs_to_spaces": true,
-    "line_numbers": true,
-    "gutter": true,
-    "line_padding_top": 0,
-    "line_padding_bottom": 1,
-    "always_show_minimap_viewport": true,
     "draw_minimap_border": false,
     "word_wrap": false,
-    "color_scheme": "Packages/arcadia-repl/clojure-dark.tmTheme"
+    "color_scheme": "Packages/arcadia-repl/clojure-dark.tmTheme",
+    "ignored_packages":
+    [
+        "Clojure"
+    ]
 }
