@@ -25,6 +25,7 @@ def create_repl(window):
     window.set_view_index(repl, group + 1, len(window.views_in_group(group + 1)))
     window.focus_view(current_view)
     repl.run_command("arcadia_repl_clear")
+    history = []
     return repl
 
 def get_repl(window):
@@ -34,16 +35,23 @@ def get_repl(window):
 
 def entered_text(view): return view.substr(sublime.Region(G["prompt"], view.size()))
 
-def send_repl(text):
+def send_repl(text, manual):
     if text == "": 
         text = " "
-    elif len(history) == 0 or (G["hist"] == 0 and history[-0] != text):
+    elif manual:
         history.append(text)
-    G["hist"] = 0
+        G["hist"] = 0
     sock.sendto(text.encode('utf-8'), (UDP_IP, UDP_PORT))
 
 def format_input_text(text):
-    res = text.replace("=>", "=>", 1).replace("\r", "").replace("\n","",1)
+    res = text 
+    ms = re.search(r"((nil)?[\r\n]*)([^\r\n]+=>)", text)
+    if ms:
+        res = text.replace("\r\n", "\n").replace("\nnil\n", "", -1).replace("nil\n", "", -1)
+        #res=text[:len(text)-len(len(ms.groups()[0]+ms.groups()[2]))]
+    #text.replace("nil\r\n", "").replace("\r\n", "")
+    # if res[0:3] == "nil":
+        # res = res[3:]
     # error = re.findall(r"(\w[^:\W\n]+): ([^\n]+)\n", res)
     # if len(error) > 0:
     #     _ns = re.split("\n", res)[-1]
@@ -75,7 +83,7 @@ class StartArcadiaReplCommand(sublime_plugin.TextCommand):
 
 class ArcadiaReplEnterCommand(sublime_plugin.TextCommand):
     def run(self, edit):
-        send_repl(entered_text(self.view))
+        send_repl(entered_text(self.view), True)
 
 class ArcadiaReplInsertCommand(sublime_plugin.TextCommand):
     def run(self, edit, data):
@@ -94,7 +102,6 @@ class ArcadiaReplHistoryCommand(sublime_plugin.TextCommand):
         repl = get_repl(self.view.window())
         if (len(history) * -1) <= G["hist"] + i < 0:
             G["hist"] += i
-            print(history[G["hist"]])
             repl.replace(edit,sublime.Region(G["prompt"], repl.size()), history[G["hist"]])
 
 def format_transfered_text(view, text):
@@ -120,7 +127,7 @@ class ArcadiaReplTransferCommand(sublime_plugin.TextCommand):
             if self.view.substr(self.view.sel()[0]) == "":
                 _s = self.view.sel()[0]
                 self.view.run_command("expand_selection", {"to": "line"})
-                send_repl(format_transfered_text(self.view, self.view.substr(self.view.sel()[0])))
+                send_repl(format_transfered_text(self.view, self.view.substr(self.view.sel()[0])), False)
                 self.view.sel().clear()
                 self.view.sel().add(_s)
                 return True
@@ -134,8 +141,7 @@ class ArcadiaReplTransferCommand(sublime_plugin.TextCommand):
                 regions = [sublime.Region(0, self.view.size())]
         for pair in regions: 
             for text in find_blocks(self.view, pair.a, pair.b):
-                #print(text)
-                send_repl(format_transfered_text(self.view, text))
+                send_repl(format_transfered_text(self.view, text), False)
         self.view.sel().clear()
         for region in sel: self.view.sel().add(region)
     
@@ -145,10 +151,12 @@ def find_blocks(view, start, end):
     while idx < end:
         enclosure = view.find(r"\"[^\"]*\"|;[^\n]*\n|\(|\[|\{|\)|\]|\}", idx)
         if not enclosure: 
-            print(view.substr(enclosure))
             break
-        if view.substr(enclosure) in ("(", "[", "{"):
-            if depth == 0: res.append(enclosure.a)
+        if view.substr(enclosure) in ("(", "[", "{", "("):
+            if depth == 0: 
+                if view.substr(sublime.Region(enclosure.a-1, enclosure.a)) == "'":
+                    res.append(enclosure.a-1)
+                else: res.append(enclosure.a)
             depth += 1
         elif view.substr(enclosure) in (")", "]", "}"):
             depth -= 1
