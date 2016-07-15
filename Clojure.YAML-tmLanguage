@@ -2,7 +2,7 @@
 ---
 name: Clojure
 scopeName: source.clojure
-fileTypes: [xyz, cljs, clj, cljc]
+fileTypes: [xyz, cljs, clj, cljc, edn]
 uuid: -5584466320959560-558446636-69771
 
 patterns:
