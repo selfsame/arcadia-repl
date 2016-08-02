@@ -106,7 +106,6 @@ class ArcadiaReplHistoryCommand(sublime_plugin.TextCommand):
 
 def format_transfered_text(view, text):
     namespacedecl = view.find(r"^[^;]*?\(", 0)
-    
     if namespacedecl and view.scope_name(namespacedecl.end()-1).startswith("source.clojure"):
         namespacedecl = view.extract_scope(namespacedecl.end()-1)
         pos = namespacedecl.begin() + 3
@@ -119,31 +118,33 @@ def format_transfered_text(view, text):
 
 class ArcadiaReplTransferCommand(sublime_plugin.TextCommand):
     def run(self, edit, scope="block"):
-        repl = get_repl(self.view.window())
-        regions, sel = [],[]
-        for region in self.view.sel(): sel.append(region)
-        if scope == "block": 
-            self.view.run_command("expand_selection", {"to": "brackets"})
-            if self.view.substr(self.view.sel()[0]) == "":
-                _s = self.view.sel()[0]
-                self.view.run_command("expand_selection", {"to": "line"})
-                send_repl(format_transfered_text(self.view, self.view.substr(self.view.sel()[0])), False)
-                self.view.sel().clear()
-                self.view.sel().add(_s)
-                return True
-        for idx in range(len(self.view.sel())):
-            if scope == "selection":
-                s = self.view.sel()[idx]
-                regions.append(sublime.Region(s.begin(), s.end()))
-            elif scope == "block":
-                regions.append(sublime.Region(self.view.sel()[idx].a - 1, self.view.sel()[idx].b + 1))
-            elif scope == "file":
-                regions = [sublime.Region(0, self.view.size())]
-        for pair in regions: 
-            for text in find_blocks(self.view, pair.a, pair.b):
-                send_repl(format_transfered_text(self.view, text), False)
-        self.view.sel().clear()
-        for region in sel: self.view.sel().add(region)
+        if scope == "file":
+            send_repl("(do "+self.view.substr(sublime.Region(0, self.view.size()))+")", False)
+        else:
+            repl = get_repl(self.view.window())
+            regions, sel = [],[]
+            for region in self.view.sel(): sel.append(region)
+            if scope == "block": 
+                self.view.run_command("expand_selection", {"to": "brackets"})
+                if self.view.substr(self.view.sel()[0]) == "":
+                    _s = self.view.sel()[0]
+                    self.view.run_command("expand_selection", {"to": "line"})
+                    send_repl(format_transfered_text(self.view, self.view.substr(self.view.sel()[0])), False)
+                    self.view.sel().clear()
+                    self.view.sel().add(_s)
+                    return True
+
+            for idx in range(len(self.view.sel())):
+                if scope == "selection":
+                    s = self.view.sel()[idx]
+                    regions.append(sublime.Region(s.begin(), s.end()))
+                elif scope == "block":
+                    regions.append(sublime.Region(self.view.sel()[idx].a - 1, self.view.sel()[idx].b + 1))
+            for pair in regions: 
+                for text in find_blocks(self.view, pair.a, pair.b):
+                    send_repl(format_transfered_text(self.view, text), False)
+            self.view.sel().clear()
+            for region in sel: self.view.sel().add(region)
     
 def find_blocks(view, start, end):
     idx, depth = start, 0
