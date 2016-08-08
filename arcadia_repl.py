@@ -5,7 +5,7 @@ UDP_IP = "127.0.0.1"
 UDP_PORT = 11211
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.setblocking(False)
-G = {"prompt": 0, "hist": 0}
+G = {"prompt": 10, "hist": 0, "namespace": " unknown=>"}
 history = []
 
 print("arcadia-repl loaded!")
@@ -14,50 +14,65 @@ def create_repl(window):
     current_view = window.active_view()
     (group, index) = window.get_view_index(current_view)
     repl = window.new_file()
-    repl.set_name("*REPL* (arcadia)")
+    repl.set_name("*arcadia-repl*")
     repl.settings().set("arcadia_repl", True)
     repl.settings().set("scope_name", "source.arcadia")
     repl.settings().set("word_wrap", True)
     repl.settings().set("line_numbers", False)
     repl.settings().set("gutter", False)
+    repl.settings().set("word_wrap", False)
     repl.set_scratch(True)
     repl.set_syntax_file("Packages/arcadia-repl/Clojure.tmLanguage")
     window.set_view_index(repl, group + 1, len(window.views_in_group(group + 1)))
     window.focus_view(current_view)
-    repl.run_command("arcadia_repl_clear")
+    send_repl("*ns*", False)
     history = []
     return repl
 
 def get_repl(window):
     for v in window.views():
-        if v.name() == "*REPL* (arcadia)": 
+        if v.name() == "*arcadia-repl*": 
             return v
+    for w in sublime.windows():
+        for v in w.views():
+            if v.name() == "*arcadia-repl*": 
+                return v
+
+def view_ns(view):
+    namespacedecl = view.find(r"^[^;]*?\(", 0)
+    namespacedecl = view.extract_scope(namespacedecl.end()-1)
+    pos = namespacedecl.begin() + 3
+    while pos < namespacedecl.end():
+        namespace = view.find(r"[\}\s][A-Za-z\_!\?\*\+\-][\w!\?\*\+\-:]*(\.[\w!\?\*\+\-:]+)*", pos)
+        nsn = view.substr(namespace)[1:]
+        return nsn
+    return False
 
 def entered_text(view): return view.substr(sublime.Region(G["prompt"], view.size()))
 
 def send_repl(text, manual):
+    special = re.search(r'\*[1-9][0-9]*', text)
     if text == "": 
         text = " "
+        history.append(text)
+        G["hist"] = 0
+    elif special:
+        n = int(special.group()[1:])
+        if (len(history) >= n):
+            text = history[len(history) - n]
+            G["hist"] = 0
     elif manual:
         history.append(text)
         G["hist"] = 0
     sock.sendto(text.encode('utf-8'), (UDP_IP, UDP_PORT))
 
 def format_input_text(text):
-    res = text 
-    ms = re.search(r"((nil)?[\r\n]*)([^\r\n]+=>)", text)
-    if ms:
-        res = text.replace("\r\n", "\n").replace("\nnil\n", "", -1).replace("nil\n", "", -1)
-        #res=text[:len(text)-len(len(ms.groups()[0]+ms.groups()[2]))]
-    #text.replace("nil\r\n", "").replace("\r\n", "")
-    # if res[0:3] == "nil":
-        # res = res[3:]
-    # error = re.findall(r"(\w[^:\W\n]+): ([^\n]+)\n", res)
-    # if len(error) > 0:
-    #     _ns = re.split("\n", res)[-1]
-    #     res = "".join(re.split("\n", res)[1:1]).replace("  at ", "\n").replace(" in .*", "").replace(" (", "\n  (")
-    #     res = ":" + str(error[0][0]) + "\n\""+error[0][1] + "\"" + res +"\n"+_ns
-    return res 
+    prompt = re.search(r"\n.+$", text)
+    if prompt:
+        res = text[:(len(prompt.group()) - 1) * -1]
+        G["namespace"] = prompt.group()
+        res = res[:-3] + prompt.group()
+    return res
 
 def update(window):
     repl = get_repl(window)
@@ -94,7 +109,7 @@ class ArcadiaReplInsertCommand(sublime_plugin.TextCommand):
 class ArcadiaReplClearCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         repl = get_repl(self.view.window())
-        repl.replace(edit,sublime.Region(0, repl.size()), ">")
+        repl.replace(edit,sublime.Region(0, repl.size()), G["namespace"][1:])
         place_cursor_at_end(repl)
 
 class ArcadiaReplHistoryCommand(sublime_plugin.TextCommand):
@@ -104,41 +119,58 @@ class ArcadiaReplHistoryCommand(sublime_plugin.TextCommand):
             G["hist"] += i
             repl.replace(edit,sublime.Region(G["prompt"], repl.size()), history[G["hist"]])
 
+class ArcadiaReplRequireCommand(sublime_plugin.TextCommand):
+    def run(self, edit):
+        repl = get_repl(self.view.window())
+        if self.view == repl: return False
+        nsn = view_ns(self.view)
+        if nsn:
+            send_repl("(do (require '"+nsn+ " :reload) (find-ns '"+nsn+ "))", False)
+
 def format_transfered_text(view, text):
-    namespacedecl = view.find(r"^[^;]*?\(", 0)
-    
-    if namespacedecl and view.scope_name(namespacedecl.end()-1).startswith("source.clojure"):
-        namespacedecl = view.extract_scope(namespacedecl.end()-1)
-        pos = namespacedecl.begin() + 3
-        while pos < namespacedecl.end():
-            namespace = view.find(r"[\}\s][A-Za-z\_!\?\*\+\-][\w!\?\*\+\-:]*(\.[\w!\?\*\+\-:]+)*", pos)
-            #print([view.substr(namespace)[1:]])
-            #return "(binding [*ns* (or (find-ns '" + view.substr(namespace)[1:] + ") (ns 'user))] " + text + ")"
-            return "(do (in-ns '" + view.substr(namespace)[1:] + ") " + text + ")"
+    if view == get_repl(view.window()):
+        return text
+    nsn = view_ns(view)
+    if nsn:
+        return "(do (if-not (find-ns '" + nsn + ") (try (require '" + nsn + " :reload) (catch Exception e (ns " + nsn + " )))) (in-ns '" + nsn + ") " + text + ")"
     return text
+
+def transfer_naked(view):
+    view.run_command("expand_selection", {"to": "brackets"})
+    if view.substr(view.sel()[0]) == "":
+        _s = view.sel()[0]
+        view.run_command("expand_selection", {"to": "line"})
+        send_repl(format_transfered_text(view, view.substr(view.sel()[0])), False)
+        view.sel().clear()
+        view.sel().add(_s)
+        return True
+    return False
 
 class ArcadiaReplTransferCommand(sublime_plugin.TextCommand):
     def run(self, edit, scope="block"):
         repl = get_repl(self.view.window())
         regions, sel = [],[]
         for region in self.view.sel(): sel.append(region)
+        if scope == "file":
+            send_repl("(do " + self.view.substr(sublime.Region(0, self.view.size())) + ")", False)
+            return True
+        if scope == "selection":
+            for s in sel:
+                send_repl(format_transfered_text(self.view, self.view.substr(s)), False)
+            return True
         if scope == "block": 
-            self.view.run_command("expand_selection", {"to": "brackets"})
-            if self.view.substr(self.view.sel()[0]) == "":
-                _s = self.view.sel()[0]
-                self.view.run_command("expand_selection", {"to": "line"})
-                send_repl(format_transfered_text(self.view, self.view.substr(self.view.sel()[0])), False)
-                self.view.sel().clear()
-                self.view.sel().add(_s)
-                return True
+            if transfer_naked(self.view): return True
+        if scope == "top-form": 
+            if transfer_naked(self.view): return True
+            for i in range(40):
+                self.view.run_command("expand_selection", {"to": "brackets"})
+            send_repl(format_transfered_text(self.view, self.view.substr(self.view.sel()[0])), False)
+            self.view.sel().clear()
+            for region in sel: self.view.sel().add(region)
+            return True
         for idx in range(len(self.view.sel())):
-            if scope == "selection":
-                s = self.view.sel()[idx]
-                regions.append(sublime.Region(s.begin(), s.end()))
-            elif scope == "block":
+            if scope == "block":
                 regions.append(sublime.Region(self.view.sel()[idx].a - 1, self.view.sel()[idx].b + 1))
-            elif scope == "file":
-                regions = [sublime.Region(0, self.view.size())]
         for pair in regions: 
             for text in find_blocks(self.view, pair.a, pair.b):
                 send_repl(format_transfered_text(self.view, text), False)

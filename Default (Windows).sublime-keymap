@@ -11,7 +11,9 @@
 		{"key": "setting.arcadia_repl", "operator": "equal", "operand": true },
 		{"key": "auto_complete_visible", "operator": "equal", "operand": false }]},
 	{"keys": ["alt+c"], "command": "arcadia_repl_clear", "args": {},
-	 "context":[{"key": "setting.arcadia_repl", "operator": "equal", "operand": true }]},
-	{"keys": ["alt+shift+\\"], "command": "arcadia_repl_transfer", "args": {"scope": "selection"}},
-	{"keys": ["alt+shift+/"], "command": "arcadia_repl_transfer", "args": {"scope": "file"}},
-	{"keys": ["alt+enter"], "command": "arcadia_repl_transfer", "args": {"scope": "block"}}] 
+	 "context":[{"key": "setting.arcadia_repl", "operator": "equal", "operand": true }]}
+	,{"keys": ["alt+shift+y"], "command": "arcadia_repl_transfer", "args": {"scope": "selection"}}
+	,{"keys": ["alt+shift+/"], "command": "arcadia_repl_transfer", "args": {"scope": "file"}}
+	,{"keys": ["alt+shift+enter"], "command": "arcadia_repl_transfer", "args": {"scope": "block"}}
+	,{"keys": ["alt+enter"], "command": "arcadia_repl_transfer", "args": {"scope": "top-form"}}
+	,{"keys": ["alt+r"], "command": "arcadia_repl_require", "args": {}}] 
