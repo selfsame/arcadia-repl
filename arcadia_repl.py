@@ -167,8 +167,20 @@ class ArcadiaReplTransferCommand(sublime_plugin.TextCommand):
             if transfer_naked(self.view): return True
         if scope == "top-form": 
             if transfer_naked(self.view): return True
+            #expand until no change, also make sure sel end is not going backwards
+            la = self.view.sel()[0].a
+            lb = self.view.sel()[0].b
             for i in range(40):
                 self.view.run_command("expand_selection", {"to": "brackets"})
+                if (self.view.sel()[0].b < lb):
+                    self.view.sel().clear()
+                    self.view.sel().add(sublime.Region(la, lb))
+                    break
+                if (self.view.sel()[0].a == la) & (self.view.sel()[0].b == lb):
+                    break
+                la = self.view.sel()[0].a
+                lb = self.view.sel()[0].b
+                
             send_repl(format_transfered_text(self.view, self.view.substr(self.view.sel()[0])), False)
             self.view.sel().clear()
             for region in sel: self.view.sel().add(region)
