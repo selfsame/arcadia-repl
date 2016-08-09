@@ -71,7 +71,12 @@ def format_input_text(text):
     if prompt:
         res = text[:(len(prompt.group()) - 1) * -1]
         G["namespace"] = prompt.group()
-        res = res[:-3] + prompt.group()
+        r2 = re.search("[\W]*$", res)
+        if r2:
+            res = res[:len(r2.group()) * -1]
+        else:
+            res = res[-2:]
+        res += prompt.group()
     return res
 
 def update(window):
