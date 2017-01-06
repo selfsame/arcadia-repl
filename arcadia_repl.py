@@ -64,6 +64,7 @@ def send_repl(text, manual):
     elif manual:
         history.append(text)
         G["hist"] = 0
+    print(text)
     sock.sendto(text.encode('utf-8'), (UDP_IP, UDP_PORT))
 
 def format_input_text(text):
@@ -82,7 +83,7 @@ def format_input_text(text):
 def update(window):
     repl = get_repl(window)
     try:
-        data = format_input_text(sock.recvfrom(2048)[0].decode("utf-8"))
+        data = format_input_text(sock.recvfrom(8192)[0].decode("utf-8"))
         repl.run_command("arcadia_repl_insert", {"data":"\n"+data})
     except: None
     sublime.set_timeout(lambda: update(window), 100)

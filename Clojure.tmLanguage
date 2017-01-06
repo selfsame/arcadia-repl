@@ -4,7 +4,6 @@
 <dict>
 	<key>fileTypes</key>
 	<array>
-		<string>xyz</string>
 		<string>cljs</string>
 		<string>clj</string>
 		<string>cljc</string>
@@ -829,7 +828,7 @@
 		<key>string_escape</key>
 		<dict>
 			<key>match</key>
-			<string>\\(.)</string>
+			<string>\\(.)[a-z]*</string>
 			<key>name</key>
 			<string>constant.character.escape.clojure</string>
 		</dict>
@@ -874,7 +873,7 @@
 		<key>word</key>
 		<dict>
 			<key>match</key>
-			<string>((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\\.\s])(\g&lt;c&gt;|[0-9#%'\*\.])*)</string>
+			<string>((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\\.\s])(\g&lt;c&gt;|[0-9#%'\*\.\:])*)</string>
 			<key>name</key>
 			<string>word</string>
 		</dict>

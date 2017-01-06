@@ -123,7 +123,7 @@ fo.bazo/core
 
 ;symbols
 methods userland foo.core/qualified
-
+[[ \newline23] ]
 ;literals
 12 2.9 3/6 0xBADA55 9r8012 07123 -1.2e-5 4.2M 18N 
 :keyword ::qualified :foo.core/resolved
@@ -146,10 +146,10 @@ methods userland foo.core/qualified
           ~@code)))
 
 ;TODO illegalize
-[foo/ /baz %1 ::foo.bar/quaz .67 #(#()) {1 2 3}]
+[foo/ /baz %1 ::foo.bar/quaz .67 #(#()) {1 2 3} \newline23]
 
 ;TODO legalize
-[:./d :. :./. ]
+[ :./d :. :./. a:b ] \newline
 
 ;TODO scope
 [clojure.pprint/*thing* #'foo foo#
