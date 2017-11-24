@@ -63,7 +63,33 @@ settings:
 - scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
   settings: { foreground: '#868686' }
 
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#dd83f6' }
 
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#83f6c4' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#d64c4c' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#68e085' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#0daeab' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#e8e76f' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#cbeedc' }
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#cb79c7' }
+
+
+- scope: 'sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr'
+  settings: { foreground: '#ae0d88' }
 
 
 - name: word

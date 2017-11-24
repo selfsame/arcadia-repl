@@ -227,7 +227,7 @@ repository:
 
   string_escape:
     name: constant.character.escape.clojure
-    match: \\(.)[a-z]*
+    match: \\(.)
 
 
 
@@ -248,7 +248,7 @@ repository:
 
   qualified_symbol:
     name: qualified
-    match: ((?<c>[^\(\)\[\]{};#%\^~`'":@\s\/\\\r\n])(\g<c>|[0-9#%'])+)([\/])(\g<c>(\g<c>|[0-9#%'\.])+)
+    match: ((?<c>[^\(\)\[\]{};#%\^~`'":@\s\/\\\r\n])(\g<c>|[0-9#%'])*)(\/)(\g<c>(\g<c>|[0-9#%'\.])+)
     captures:
       '1': {name: namespace}
  

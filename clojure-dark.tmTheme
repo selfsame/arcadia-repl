@@ -162,6 +162,87 @@
 			</dict>
 		</dict>
 		<dict>
+			<key>scope</key>
+			<string>sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#dd83f6</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#83f6c4</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#d64c4c</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#68e085</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#0daeab</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#e8e76f</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#cbeedc</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#cb79c7</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr sexpr</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#ae0d88</string>
+			</dict>
+		</dict>
+		<dict>
 			<key>name</key>
 			<string>word</string>
 			<key>scope</key>

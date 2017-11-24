@@ -401,7 +401,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\\r\n])(\g&lt;c&gt;|[0-9#%'])+)([\/])(\g&lt;c&gt;(\g&lt;c&gt;|[0-9#%'\.])+)</string>
+			<string>((?&lt;c&gt;[^\(\)\[\]{};#%\^~`'":@\s\/\\\r\n])(\g&lt;c&gt;|[0-9#%'])*)(\/)(\g&lt;c&gt;(\g&lt;c&gt;|[0-9#%'\.])+)</string>
 			<key>name</key>
 			<string>qualified</string>
 		</dict>
@@ -828,7 +828,7 @@
 		<key>string_escape</key>
 		<dict>
 			<key>match</key>
-			<string>\\(.)[a-z]*</string>
+			<string>\\(.)</string>
 			<key>name</key>
 			<string>constant.character.escape.clojure</string>
 		</dict>
