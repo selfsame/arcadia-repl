@@ -1,7 +1,7 @@
 # sublimeText 3 Arcadia REPL & Clojure .tmLanguage/.tmTheme 
 
 * clone repo into sublime Packages dir
-* right click in file view to bring up context menu, and "start Arcadia REPL"
+* right click in file view to bring up context menu, and "start Arcadia NREPL" (or UDP REPL if on pre alpha Arcadia versions)
 
 ![arcadia-repl3](https://cloud.githubusercontent.com/assets/2467644/17498186/b5a83e26-5d93-11e6-85d8-d6eb75c8160a.gif)
 
