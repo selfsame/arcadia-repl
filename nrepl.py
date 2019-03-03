@@ -58,14 +58,13 @@ def _bencode_connect(url, port):
     return bencode.BencodeIO(f, on_close=s.close)
 
 def init_repl():
-    print("init_repl")
     global G
     global sock
     G.pop('session', None)
-    print(G)
     sock = _bencode_connect(UDP_IP, UDP_PORT)
 
 def nrepl_format(s):
+    #s = s.replace("\n", "\\n")
     if 'session' in G:
         return {"session": G['session'], "id": "sublime", "op": "eval", "code": s}
     else:
@@ -88,7 +87,6 @@ def send_repl(text, manual):
     elif manual:
         history.append(text)
         G["hist"] = 0
-    print(text)
     try:
         sock.write(nrepl_format(text))
     except ConnectionAbortedError as e:
