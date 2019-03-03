@@ -104,8 +104,11 @@ def update(window):
             if 'value' in raw:
                 v = raw['value']
                 ns = raw['ns']
-                print(raw)
                 G["namespace"] = ns+"=>"
+                G["session"] = raw['session']
+                repl.run_command("arcadia_repl_insert", {"data":"\n"+v+"\n"+G["namespace"]})
+            elif 'err' in raw:
+                v = raw['err']
                 G["session"] = raw['session']
                 repl.run_command("arcadia_repl_insert", {"data":"\n"+v+"\n"+G["namespace"]})
     except: None
