@@ -1,8 +1,15 @@
 [
     {
         "id": "arcadia-repl",
-        "caption": "Start Arcadia REPL",
+        "caption": "Start Arcadia UDP REPL",
         "command": "start_arcadia_repl"
         
-    }
+    },
+
+    {
+        "id": "nrepl",
+        "caption": "Start Arcadia NREPL",
+        "command": "start_nrepl_repl"
+        
+    },
 ]
