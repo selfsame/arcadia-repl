@@ -98,6 +98,17 @@ def _read_datum(s):
     if delim:
         return _read_fns.get(delim, lambda s: _read_bytes(s, delim))(s)
 
+def encode_bytes(x):
+    return (str(len(x)).encode('utf-8'), b':', x)
+
+
+def encode_string(x):
+    try:
+        s = x.encode('utf-8')
+    except UnicodeDecodeError:
+        return encode_bytes(x)
+
+    return (str(len(s)).encode('utf-8'), b':', s)
 
 def _write_datum(x, out):
     if isinstance(x, string_types):

@@ -5,10 +5,11 @@ UDP_IP = "127.0.0.1"
 UDP_PORT = 11211
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.setblocking(False)
-G = {"prompt": 10, "hist": 0, "namespace": " unknown=>"}
+G = {"prompt": 10, "hist": 0, "namespace": " unknown=>", "active": False}
 history = []
 
 print("arcadia-repl loaded!")
+print("active", G["active"])
 
 def create_repl(window):
     current_view = window.active_view()
@@ -97,6 +98,7 @@ def place_cursor_at_end(view):
 
 class StartArcadiaReplCommand(sublime_plugin.TextCommand):
     def run(self, edit):
+        G["active"] = True
         window = self.view.window()
         repl = get_repl(window) or create_repl(window)
         window.focus_view(get_repl(window))
@@ -104,22 +106,26 @@ class StartArcadiaReplCommand(sublime_plugin.TextCommand):
 
 class ArcadiaReplEnterCommand(sublime_plugin.TextCommand):
     def run(self, edit):
+        if not G["active"]: pass
         send_repl(entered_text(self.view), True)
 
 class ArcadiaReplInsertCommand(sublime_plugin.TextCommand):
     def run(self, edit, data):
+        if not G["active"]: pass
         repl = get_repl(self.view.window())
         repl.insert(edit,repl.size(), data)
         place_cursor_at_end(repl)
 
 class ArcadiaReplClearCommand(sublime_plugin.TextCommand):
     def run(self, edit):
+        if not G["active"]: pass
         repl = get_repl(self.view.window())
         repl.replace(edit,sublime.Region(0, repl.size()), G["namespace"][1:])
         place_cursor_at_end(repl)
 
 class ArcadiaReplHistoryCommand(sublime_plugin.TextCommand):
     def run(self, edit, i=0):
+        if not G["active"]: pass
         repl = get_repl(self.view.window())
         if (len(history) * -1) <= G["hist"] + i < 0:
             G["hist"] += i
@@ -127,6 +133,7 @@ class ArcadiaReplHistoryCommand(sublime_plugin.TextCommand):
 
 class ArcadiaReplRequireCommand(sublime_plugin.TextCommand):
     def run(self, edit):
+        if not G["active"]: pass
         repl = get_repl(self.view.window())
         if self.view == repl: return False
         nsn = view_ns(self.view)
@@ -154,6 +161,7 @@ def transfer_naked(view):
 
 class ArcadiaReplTransferCommand(sublime_plugin.TextCommand):
     def run(self, edit, scope="block"):
+        if not G["active"]: pass
         repl = get_repl(self.view.window())
         regions, sel = [],[]
         for region in self.view.sel(): sel.append(region)
