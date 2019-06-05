@@ -16,7 +16,7 @@ try:
 except ImportError:
     from io import StringIO
 
-import sys
+import sys, os
 
 # Some code so we can use different features without worrying about versions.
 PY2 = sys.version_info[0] == 2
@@ -116,6 +116,8 @@ def _write_datum(x, out):
         # TODO revisit encodings, this is surely not right. Python
         # (2.x, anyway) conflates bytes and strings, but 3.x does not...
         l = len(x.replace("\n", "nn"))
+        if os.name is "posix":
+            l = len(x)
         out.write(str(l))
         out.write(":")
         out.write(x)
