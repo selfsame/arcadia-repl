@@ -1,18 +1,72 @@
 [	 {"keys": ["up"], "command": "arcadia_repl_history", "args": {"i":-1},
 	  "context": [
+	  	{"key": "arcadia_nrepl", "operand": true },
 	  	{"key": "setting.arcadia_repl", "operator": "equal", "operand": true },
 		{ "key": "auto_complete_visible", "operator": "equal", "operand": false }]}
 	,{"keys": ["down"], "command": "arcadia_repl_history", "args": {"i":1},
 	  "context": [
+	  	{"key": "arcadia_nrepl", "operand": true },
 	  	{"key": "setting.arcadia_repl", "operator": "equal", "operand": true },
 		{ "key": "auto_complete_visible", "operator": "equal", "operand": false }]}
 	,{"keys": ["enter"], "command": "arcadia_repl_enter", "args": {},
 	  "context": [
+	  	{"key": "arcadia_nrepl", "operand": true },
 		{"key": "setting.arcadia_repl", "operator": "equal", "operand": true },
 		{"key": "auto_complete_visible", "operator": "equal", "operand": false }]}
-	,{"keys": ["alt+c"], "command": "arcadia_repl_clear", "args": {}}
-	,{"keys": ["alt+shift+y"], "command": "arcadia_repl_transfer", "args": {"scope": "selection"}}
-	,{"keys": ["alt+shift+/"], "command": "arcadia_repl_transfer", "args": {"scope": "file"}}
-	,{"keys": ["alt+shift+enter"], "command": "arcadia_repl_transfer", "args": {"scope": "block"}}
-	,{"keys": ["alt+enter"], "command": "arcadia_repl_transfer", "args": {"scope": "top-form"}}
-	,{"keys": ["alt+r"], "command": "arcadia_repl_require", "args": {}}]
+	,{"keys": ["alt+c"], "command": "arcadia_repl_clear", "args": {},
+		"context": [
+	  		{"key": "arcadia_nrepl", "operand": true },]}
+	,{"keys": ["alt+shift+y"], "command": "arcadia_repl_transfer", "args": {"scope": "selection"},
+		"context": [
+	  		{"key": "arcadia_nrepl", "operand": true },]}
+	,{"keys": ["alt+shift+/"], "command": "arcadia_repl_transfer", "args": {"scope": "file"},
+		"context": [
+	  		{"key": "arcadia_nrepl", "operand": true },]}
+	,{"keys": ["alt+shift+enter"], "command": "arcadia_repl_transfer", "args": {"scope": "block"},
+		"context": [
+	  		{"key": "arcadia_nrepl", "operand": true },]}
+	,{"keys": ["alt+enter"], "command": "arcadia_repl_transfer", "args": {"scope": "top-form"},
+		"context": [
+	  		{"key": "arcadia_nrepl", "operand": true },]}
+	,{"keys": ["alt+r"], "command": "arcadia_repl_require", "args": {},
+		"context": [
+	  		{"key": "arcadia_nrepl", "operand": true },]},
+
+
+
+{"keys": ["up"], "command": "arcadia_repl_history_udp", "args": {"i":-1},
+	  "context": [
+	  	{"key": "arcadia_udp", "operand": true },
+	  	{"key": "setting.arcadia_repl", "operator": "equal", "operand": true },
+		{ "key": "auto_complete_visible", "operator": "equal", "operand": false }]}
+	,{"keys": ["down"], "command": "arcadia_repl_history_udp", "args": {"i":1},
+	  "context": [
+	  	{"key": "arcadia_udp", "operand": true },
+	  	{"key": "setting.arcadia_repl", "operator": "equal", "operand": true },
+		{ "key": "auto_complete_visible", "operator": "equal", "operand": false }]}
+	,{"keys": ["enter"], "command": "arcadia_repl_enter_udp", "args": {},
+	  "context": [
+	  	{"key": "arcadia_udp", "operand": true },
+		{"key": "setting.arcadia_repl", "operator": "equal", "operand": true },
+		{"key": "auto_complete_visible", "operator": "equal", "operand": false }]}
+	,{"keys": ["alt+c"], "command": "arcadia_repl_clear_udp", "args": {},
+		"context": [
+	  		{"key": "arcadia_udp", "operand": true },]}
+	,{"keys": ["alt+shift+y"], "command": "arcadia_repl_transfer_udp", "args": {"scope": "selection"},
+		"context": [
+	  		{"key": "arcadia_udp", "operand": true },]}
+	,{"keys": ["alt+shift+/"], "command": "arcadia_repl_transfer_udp", "args": {"scope": "file"},
+		"context": [
+	  		{"key": "arcadia_udp", "operand": true },]}
+	,{"keys": ["alt+shift+enter"], "command": "arcadia_repl_transfer_udp", "args": {"scope": "block"},
+		"context": [
+	  		{"key": "arcadia_udp", "operand": true },]}
+	,{"keys": ["alt+enter"], "command": "arcadia_repl_transfer_udp", "args": {"scope": "top-form"},
+		"context": [
+	  		{"key": "arcadia_udp", "operand": true },]}
+	,{"keys": ["alt+r"], "command": "arcadia_repl_require_udp", "args": {},
+		"context": [
+	  		{"key": "arcadia_udp", "operand": true },]}
+
+
+]

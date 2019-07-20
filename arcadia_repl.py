@@ -104,26 +104,33 @@ class StartArcadiaReplCommand(sublime_plugin.TextCommand):
         window.focus_view(get_repl(window))
         update(window)
 
-class ArcadiaReplEnterCommand(sublime_plugin.TextCommand):
+class PluginEventListener(sublime_plugin.EventListener):
+    def on_query_context(self, view, key, operator, operand, match_all):
+        if key == "arcadia_udp":
+            return G["active"] or False
+
+
+
+class ArcadiaReplEnterUdpCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         if not G["active"]: pass
         send_repl(entered_text(self.view), True)
 
-class ArcadiaReplInsertCommand(sublime_plugin.TextCommand):
+class ArcadiaReplInsertUdpCommand(sublime_plugin.TextCommand):
     def run(self, edit, data):
         if not G["active"]: pass
         repl = get_repl(self.view.window())
         repl.insert(edit,repl.size(), data)
         place_cursor_at_end(repl)
 
-class ArcadiaReplClearCommand(sublime_plugin.TextCommand):
+class ArcadiaReplClearUdpCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         if not G["active"]: pass
         repl = get_repl(self.view.window())
         repl.replace(edit,sublime.Region(0, repl.size()), G["namespace"][1:])
         place_cursor_at_end(repl)
 
-class ArcadiaReplHistoryCommand(sublime_plugin.TextCommand):
+class ArcadiaReplHistoryUdpCommand(sublime_plugin.TextCommand):
     def run(self, edit, i=0):
         if not G["active"]: pass
         repl = get_repl(self.view.window())
@@ -131,7 +138,7 @@ class ArcadiaReplHistoryCommand(sublime_plugin.TextCommand):
             G["hist"] += i
             repl.replace(edit,sublime.Region(G["prompt"], repl.size()), history[G["hist"]])
 
-class ArcadiaReplRequireCommand(sublime_plugin.TextCommand):
+class ArcadiaReplRequireUdpCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         if not G["active"]: pass
         repl = get_repl(self.view.window())
@@ -159,7 +166,7 @@ def transfer_naked(view):
         return True
     return False
 
-class ArcadiaReplTransferCommand(sublime_plugin.TextCommand):
+class ArcadiaReplTransferUdpCommand(sublime_plugin.TextCommand):
     def run(self, edit, scope="block"):
         if not G["active"]: pass
         repl = get_repl(self.view.window())

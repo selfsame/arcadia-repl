@@ -129,6 +129,11 @@ class StartNreplReplCommand(sublime_plugin.TextCommand):
         window.focus_view(get_repl(window))
         update(window)
 
+class PluginEventListener(sublime_plugin.EventListener):
+    def on_query_context(self, view, key, operator, operand, match_all):
+        if key == "arcadia_nrepl":
+            return G["active"] or False
+
 class ArcadiaReplEnterCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         if not G["active"]: pass
