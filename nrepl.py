@@ -3,7 +3,7 @@ import re, socket
 arcadia = __import__("arcadia-repl")
 bencode = arcadia.bencode
 
-UDP_IP = "127.0.0.1"
+UDP_IP = "localhost" #"127.0.0.1"
 UDP_PORT = 3722
 sock = None
 G = {"prompt": 10, "hist": 0, "namespace": " unknown=>", "active": False}
@@ -27,7 +27,7 @@ def create_repl(window):
     repl.set_syntax_file("Packages/arcadia-repl/Clojure.tmLanguage")
     window.set_view_index(repl, group + 1, len(window.views_in_group(group + 1)))
     window.focus_view(current_view)
-    send_repl(":ok", False)
+    #send_repl(":ok", False)
     history = []
     return repl
 
@@ -89,10 +89,18 @@ def send_repl(text, manual):
         history.append(text)
         G["hist"] = 0
     try:
+        print(nrepl_format(text))
         sock.write(nrepl_format(text))
     except ConnectionAbortedError as e:
         init_repl()
         sock.write(nrepl_format(text))
+    except BrokenPipeError as e:
+        init_repl()
+        sock.write(nrepl_format(text))
+    except AttributeError as e:
+        init_repl()
+        sock.write(nrepl_format(text))  
+
 
 
 def update(window):
@@ -100,6 +108,7 @@ def update(window):
     try:
         raw = sock.read()
         if isinstance(raw, dict):
+            print(raw)
             if 'value' in raw:
                 v = raw['value']
                 ns = raw['ns']
@@ -169,8 +178,8 @@ def format_transfered_text(view, text):
     if view == get_repl(view.window()):
         return text
     nsn = view_ns(view)
-    if nsn:
-        return "(do (if-not (find-ns '" + nsn + ") (try (require '" + nsn + " :reload) (catch Exception e (ns " + nsn + " )))) (in-ns '" + nsn + ") " + text + ")"
+    #if nsn:
+    #    return "(do (if-not (find-ns '" + nsn + ") (try (require '" + nsn + " :reload) (catch Exception e (ns " + nsn + " )))) (in-ns '" + nsn + ") " + text + ")"
     return text
 
 def transfer_naked(view):
