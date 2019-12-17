@@ -3,7 +3,7 @@ import re, socket
 arcadia = __import__("arcadia-repl")
 bencode = arcadia.bencode
 
-UDP_IP = "localhost" #"127.0.0.1"
+UDP_IP = "localhost"
 UDP_PORT = 3722
 sock = None
 G = {"prompt": 10, "hist": 0, "namespace": " unknown=>", "active": False}
@@ -55,6 +55,7 @@ def entered_text(view): return view.substr(sublime.Region(G["prompt"], view.size
 def _bencode_connect(url, port):
     s = socket.create_connection((url, port))
     s.setblocking(False)
+    s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
     f = s.makefile('rw')
     return bencode.BencodeIO(f, on_close=s.close)
 
@@ -104,14 +105,20 @@ def send_repl(text, manual):
 
 
 def update(window):
-    repl = get_repl(window)
     try:
+        repl = get_repl(window)
+
         raw = sock.read()
+
+        if raw != None:
+            print("raw:", raw)
         if isinstance(raw, dict):
             print(raw)
+            if 'ex' in raw:
+                repl.run_command("arcadia_repl_insert", {"data":"\n"+raw['ex']+"\n"+G["namespace"]})
             if 'value' in raw:
                 v = raw['value']
-                ns = raw['ns']
+                ns = 'ns' in raw and raw['ns'] or 'nrepl'
                 G["namespace"] = ns+"=>"
                 G["session"] = raw['session']
                 repl.run_command("arcadia_repl_insert", {"data":"\n"+v+"\n"+G["namespace"]})
@@ -119,7 +126,9 @@ def update(window):
                 v = raw['err']
                 G["session"] = raw['session']
                 repl.run_command("arcadia_repl_insert", {"data":"\n"+v+"\n"+G["namespace"]})
-    except: None
+    except ConnectionResetError as e:
+        pass
+
     sublime.set_timeout(lambda: update(window), 100)
 
 def place_cursor_at_end(view):
