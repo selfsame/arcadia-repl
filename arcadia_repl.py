@@ -1,3 +1,4 @@
+import os
 import sublime, sublime_plugin
 import re, socket
 
@@ -68,6 +69,8 @@ def send_repl(text, manual):
     sock.sendto(text.encode('utf-8'), (UDP_IP, UDP_PORT))
 
 def format_input_text(text):
+    if os.name == 'nt':
+        text = text.replace("\r", "")
     prompt = re.search(r"\n.+$", text)
     if prompt:
         res = text[:(len(prompt.group()) - 1) * -1]
