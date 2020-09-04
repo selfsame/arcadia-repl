@@ -9,7 +9,6 @@ G = {"prompt": 10, "hist": 0, "namespace": " unknown=>", "active": False}
 history = []
 
 print("arcadia-repl loaded!")
-print("active", G["active"])
 
 def create_repl(window):
     current_view = window.active_view()
@@ -85,7 +84,7 @@ def update(window):
     repl = get_repl(window)
     try:
         data = format_input_text(sock.recvfrom(8192)[0].decode("utf-8"))
-        repl.run_command("arcadia_repl_insert", {"data":"\n"+data})
+        repl.run_command("arcadia_repl_insert_udp", {"data":"\n"+data})
     except: None
     sublime.set_timeout(lambda: update(window), 100)
 

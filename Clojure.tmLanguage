@@ -8,6 +8,7 @@
 		<string>clj</string>
 		<string>cljc</string>
 		<string>edn</string>
+		<string>fnl</string>
 	</array>
 	<key>name</key>
 	<string>Clojure</string>
